@@ -24,16 +24,15 @@
 | `data/sediment_13_rounds.geojson` | จุดตรวจพร้อมค่าผลตรวจรายรอบ ใช้ใน QGIS/ArcGIS |
 | `data/stations.csv` | ข้อมูลทะเบียนสถานี 28 จุดและสถานะการยืนยันพิกัด |
 | `source/report_text_extracted.txt` | ข้อความที่สกัดจาก PDF อ้างอิง (ไม่ใช่ PDF ต้นฉบับ) |
-| `.github/workflows/deploy-pages.yml` | ระบบ deploy เว็บไซต์ผ่าน GitHub Actions |
 
 ## เผยแพร่เว็บไซต์ผ่าน GitHub Pages
 
-1. ไปที่ GitHub repository > **Settings** > **Pages**.
-2. ที่ **Build and deployment / Source** เลือก **GitHub Actions**.
-3. เปิดแท็บ **Actions**, เลือก **Deploy sediment GIS timeline to GitHub Pages** แล้วกด **Run workflow** หากการ push ยังไม่ได้ deploy อัตโนมัติ.
-4. เมื่อสถานะ Deploy เป็น Success เว็บไซต์ควรเปิดได้ที่ **https://kongsak4807017.github.io/theriver/** และหน้า HTML แบบระบุชื่อที่ **https://kongsak4807017.github.io/theriver/gis_timeline_sediment_2025_2026.html**.
+เว็บไซต์เผยแพร่สำเร็จด้วย **GitHub Pages (Deploy from branch `main`)** โดย GitHub Pages ทำ Build และ Deploy สำเร็จเมื่อ 25 ตุลาคม 2569 ตรวจสอบได้จาก [successful deployment run](https://github.com/kongsak4807017/theriver/actions/runs/40169603750)
 
-**หมายเหตุ:** การมี workflow บน repository ไม่ได้แปลว่า GitHub Pages ถูกเปิดใช้แล้ว ต้องตรวจสอบสถานะ Deployment ก่อนสื่อสาร URL สาธารณะ
+- [เปิดเว็บแผนที่ GIS Timeline](https://kongsak4807017.github.io/theriver/)
+- [เปิด HTML ชื่อเต็ม](https://kongsak4807017.github.io/theriver/gis_timeline_sediment_2025_2026.html)
+- การแก้ไขไฟล์บน `main` จะทำให้ GitHub Pages สร้างเว็บไซต์จาก branch นี้โดยอัตโนมัติ
+- หากหน้าเว็บไม่อัปเดต ให้ตรวจสอบสถานะที่ [Actions](https://github.com/kongsak4807017/theriver/actions)
 
 ## Data dictionary
 
