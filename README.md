@@ -22,6 +22,7 @@
 | `gis_timeline_sediment_2025_2026.html` | หน้าแผนที่ชื่อเดิมตามที่ร้องขอ |
 | `data/sediment_13_rounds.csv` | ข้อมูลผลตรวจแบบ long table สำหรับ Excel, Python, Power BI |
 | `data/sediment_13_rounds.geojson` | จุดตรวจพร้อมค่าผลตรวจรายรอบ ใช้ใน QGIS/ArcGIS |
+| `data/stations.csv` | ข้อมูลทะเบียนสถานี 28 จุดและสถานะการยืนยันพิกัด |
 | `source/report_text_extracted.txt` | ข้อความที่สกัดจาก PDF อ้างอิง (ไม่ใช่ PDF ต้นฉบับ) |
 | `.github/workflows/deploy-pages.yml` | ระบบ deploy เว็บไซต์ผ่าน GitHub Actions |
 
