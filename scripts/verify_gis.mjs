@@ -44,8 +44,8 @@ assert.equal(health.latest_totals.urine_over_reference,31);
 assert.equal(healthGeo.features.length,25);
 assert.equal(healthGeo.features.filter(f=>f.properties.cohort==="2025").length,7);
 assert.equal(healthGeo.features.filter(f=>f.properties.cohort==="2026").length,18);
-for(const feature of healthGeo.features){const [lon,lat]=feature.geometry.coordinates;assert.ok(lon>=96&&lon<=105&&lat>=15&&lat<=24);assert.match(feature.properties.start_date,/^\\d{4}-\\d{2}-\\d{2}$/);if(feature.properties.cohort==="2026")assert.ok(feature.properties.abnormal_count===null||feature.properties.abnormal_count>=5);}
-for(const x of [JSON.stringify(health),JSON.stringify(healthGeo)])assert.doesNotMatch(x,/\\bCRI\\d{3,}\\b|เลขกระปุก|เลข HN|\\bHN\\b/, "Public health files must not include individual identifiers");
+for(const feature of healthGeo.features){const [lon,lat]=feature.geometry.coordinates;assert.ok(lon>=96&&lon<=105&&lat>=15&&lat<=24);assert.match(feature.properties.start_date,/^\d{4}-\d{2}-\d{2}$/);if(feature.properties.cohort==="2026")assert.ok(feature.properties.abnormal_count===null||feature.properties.abnormal_count>=5);}
+for(const x of [JSON.stringify(health),JSON.stringify(healthGeo)])assert.doesNotMatch(x,/\bCRI\d{3,}\b|เลขกระปุก|เลข HN|\bHN\b/, "Public health files must not include individual identifiers");
 for(const d of data.healthDistricts){
   assert.ok(d.exceedPublicCount===null||d.exceedPublicCount>=5);
 }
@@ -54,7 +54,7 @@ assert.doesNotMatch(JSON.stringify(data.events),/\[withheld\]/,"Do not publish c
 assert.ok(html.includes('id="dateSlider"')&&html.includes('data-layer="health"'));
 assert.ok(html.includes("environment_timeline_v2.json")&&html.includes("sediment_13_rounds.geojson"));
 assert.ok(html.includes("health_population_timeline_public.json")&&html.includes("H.baseline_districts")&&html.includes("H.followup_phases"));
-assert.ok(html.includes(\'id="healthTimeline"\'));
+assert.ok(html.includes('id="healthTimeline"'));
 const code=html.match(/<script>\n([\s\S]*?)\n<\/script>/);
 assert.ok(code,"Client script must be present");
 new Function(code[1]);
