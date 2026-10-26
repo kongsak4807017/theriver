@@ -1,0 +1,22 @@
+name: Verify The River GIS data
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "data/**"
+      - "scripts/**"
+      - ".github/workflows/verify-gis.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify GIS datasets, privacy and browser script
+        run: node scripts/verify_gis.mjs
