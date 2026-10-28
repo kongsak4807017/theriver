@@ -105,6 +105,15 @@ assert.ok(html.includes("pcd_surface_water_23_rounds.json"));
 assert.ok(html.includes("W.observations")&&html.includes("surfaceWaterDetail"));
 console.log("PASS PCD 23 rounds, 21 As stations in last round, 3 Sai River exceedances, 410 geofeatures and QA");
 
+// Every marker popup and station-history pane must show source-grounded attribution.
+assert.ok(html.includes("function sourceAttribution(kind,record)"),"Source attribution helper is present");
+assert.ok(html.includes("attributionMarkup(kind,s,false)"),"Popup immediately identifies agency");
+assert.ok(html.includes("attributionMarkup(sel.kind,attributionRecord,true)"),"History detail identifies agency and source");
+assert.ok(html.includes("ศูนย์วิทยาศาสตร์การแพทย์ที่ 1/1 เชียงราย"),"RMS food and water attribution");
+assert.ok(html.includes("กองโรคจากการประกอบอาชีพและสิ่งแวดล้อม"),"Health report laboratory attribution");
+assert.ok(html.includes("กรมควบคุมมลพิษ"),"PCD publisher is identified");
+assert.ok(html.includes('r.lat==="number"&&typeof r.lon==="number"'),"Unlocated fish records must not crash station details");
+console.log("PASS GIS popup and detail agency attribution for all categories; unresolved lab stays explicitly unidentified");
 const code=html.match(/<script>\n([\s\S]*?)\n<\/script>/);
 assert.ok(code,"Client script must be present");
 new Function(code[1]);
