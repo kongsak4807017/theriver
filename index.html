@@ -22,6 +22,11 @@ select,input[type=date]{border:1px solid #d5e3e6;background:#fff;border-radius:9
 .field{display:flex;flex-direction:column;gap:5px;flex:1}.field span{font-size:11px;color:var(--muted)}
 #details{font-size:12px;line-height:1.8}#details p{margin:6px 0}.kv{display:grid;grid-template-columns:90px 1fr;gap:4px 12px;padding:7px 0}.kv>span:nth-child(odd){color:var(--muted)}.spark{max-width:100%;width:100%;display:block;margin-top:8px;background:#fff;border-radius:10px;border:1px solid var(--border)}
 main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:0 0 111px}.leaflet-container{font:inherit}.leaflet-control-attribution{font-size:9px!important}.leaflet-popup-content{line-height:1.55;min-width:210px;font-size:12px}.leaflet-popup-content b{font-size:14px}
+.lab-attrib{margin:8px 0 5px;padding:8px 9px;background:#f0f8f9;border:1px solid #cfe5e8;border-left:3px solid #168394;border-radius:8px;line-height:1.55;overflow-wrap:anywhere}
+.lab-attrib strong{display:block;color:#195568;font-size:11px!important}
+.lab-attrib .agency-value{font-weight:650;color:#133944;font-size:12px}
+.lab-attrib .agency-note{font-size:11px;color:#617983;line-height:1.5}
+#details .lab-attrib{margin:8px 0 11px}
 .maptop{position:absolute;right:14px;top:14px;z-index:450;display:flex;gap:8px;max-width:calc(100% - 30px);flex-wrap:wrap;justify-content:flex-end}
 .mapbtn{background:white;padding:9px 12px;box-shadow:0 2px 12px #143f4433;border:1px solid var(--border);border-radius:10px;font-size:12px}
 .legend{position:absolute;right:14px;bottom:122px;z-index:450;background:white;padding:11px;border-radius:12px;box-shadow:0 2px 12px #143f442e;font-size:11px;line-height:1.9}
@@ -109,7 +114,30 @@ function sev(st){if(st==="EXCEED_STANDARD"||st==="severe")return "severe";if(st=
 function stationHistory(station){return E.tapReadings.filter(q=>q.station===station).sort((a,b)=>a.start.localeCompare(b.start))}
 function tapValue(r){const as=cleanNum(r.as),pb=cleanNum(r.pb);return as!==null?"As "+fmt(as)+" mg/L":pb!==null?"Pb "+fmt(pb)+" mg/L":"ไม่มีค่าตัวเลข"}
 function lastBefore(items,when){return items.filter(x=>x.start<=when).sort((a,b)=>a.start.localeCompare(b.start)).at(-1)}
-function popupHtml(kind,title,summary,date,s){return '<b>'+xesc(title)+'</b><br><span class="tag">'+xesc(kind)+'</span> <span class="small">'+xesc(thaiDate(date))+'</span><p>'+xesc(summary)+'</p><span class="small">'+(isApprox(s)?"⚠ ตำแหน่งโดยประมาณ ไม่ใช่พิกัดจุดเก็บจริง":"พิกัดตามชุดข้อมูล")+'</span><br><b style="color:#08788a">คลิกหมุดเพื่อดูประวัติและอ้างอิง ↘</b>'}
+// Attribution distinguishes the analyzing laboratory from the publisher of a report.
+const RMS11="ศูนย์วิทยาศาสตร์การแพทย์ที่ 1/1 เชียงราย";
+function sourceAttribution(kind,record){
+ const r=record||{};
+ if(kind==="sediment"||kind==="surface_water")return {label:"หน่วยงานเจ้าของรายงานผล",agency:"กรมควบคุมมลพิษ",note:"ยังไม่ระบุชื่อห้องปฏิบัติการรายตัวอย่างในชุดข้อมูล GIS",basis:kind==="sediment"?"รายงานตะกอนดิน กรมควบคุมมลพิษ":"รายงานน้ำผิวดิน กรมควบคุมมลพิษ ครั้งที่ 23"};
+ if(kind==="tap_water"){
+  if(r.type==="school_water")return {label:"หน่วยงานตรวจวิเคราะห์",agency:"ยังไม่ระบุในรายงานสรุป",note:"ผลตรวจน้ำโรงเรียน ไม่ใช่ผลตรวจปัสสาวะนักเรียน",basis:r.source||"21 ตค 69 (1).pdf"};
+  return {label:"หน่วยงานตรวจวิเคราะห์",agency:RMS11,note:"ดำเนินงานร่วมกับ อบจ.เชียงราย และ สสจ.เชียงราย",basis:r.source||"รายงานตรวจน้ำประปา"};
+ }
+ if(kind==="fish"||kind==="vegetable"||kind==="rice")return {label:"หน่วยงานตรวจวิเคราะห์",agency:RMS11,note:r.collector_agency?"หน่วยเก็บ/นำส่ง: "+r.collector_agency:"",basis:r.source||"รายงานตรวจโลหะหนักในอาหาร"};
+ if(kind==="health"){
+  if((r.start||"")<"2026-07-14")return {label:"หน่วยงานตรวจวิเคราะห์",agency:"ยังไม่ระบุในชุดข้อมูลสรุประดับอำเภอ",note:"ผลตรวจปัสสาวะ ไม่ใช่ผลตรวจน้ำหรืออาหาร",basis:"ทะเบียนตรวจคัดกรองสุขภาพฯ / 24 ก.พ. 2569"};
+  return {label:"หน่วยงานตรวจวิเคราะห์ (Total As ในปัสสาวะ)",agency:"กองโรคจากการประกอบอาชีพและสิ่งแวดล้อม กรมควบคุมโรค (ศูนย์ระยอง)",note:"การตรวจแยกชนิดและติดตามบางกรณีมีห้องปฏิบัติการอื่นร่วมด้วย",basis:"รายงานเฝ้าระวังสุขภาพ 21 ต.ค. 2569"};
+ }
+ if(kind==="river")return {label:"หน่วยงานทะเบียนจุดเก็บสัตว์น้ำ",agency:r.agency||"ประมงจังหวัดเชียงราย",note:"พิกัดอ้างอิง ไม่ใช่ผลตรวจน้ำ",basis:r.source||""};
+ return {label:"หน่วยงานตรวจวิเคราะห์",agency:"ยังไม่ระบุในแหล่งข้อมูล",note:"",basis:r.source||""};
+}
+function attributionMarkup(kind,record,showBasis){
+ const v=sourceAttribution(kind,record);
+ return '<div class="lab-attrib"><strong>🏛 '+xesc(v.label)+'</strong><span class="agency-value">'+xesc(v.agency)+'</span>'+
+ (v.note?'<div class="agency-note">'+xesc(v.note)+'</div>':'')+
+ (showBasis&&v.basis?'<div class="agency-note">ที่มา: '+xesc(v.basis)+'</div>':'')+'</div>';
+}
+function popupHtml(kind,title,summary,date,s){return '<b>'+xesc(title)+'</b><br><span class="tag">'+xesc(kind)+'</span> <span class="small">'+xesc(thaiDate(date))+'</span><p>'+xesc(summary)+'</p><span class="small">'+(isApprox(s)?"⚠ ตำแหน่งโดยประมาณ ไม่ใช่พิกัดจุดเก็บจริง":"พิกัดตามชุดข้อมูล")+'</span>'+attributionMarkup(kind,s,false)+'<b style="color:#08788a">คลิกหมุดเพื่อดูประวัติและอ้างอิง ↘</b>'}
 function add(kind,s,label,summary,date,sel,status){if(!coordAllowed(s))return false;const marker=L.marker([s.lat,s.lon],{icon:icon(kind,sev(status),isApprox(s))});marker.bindTooltip(label);marker.bindPopup(popupHtml(kind,label,summary,date,s));marker.on("click",()=>selectDetail(sel));layerGroups[kind].addLayer(marker);return true}
 function makeChart(readings,field,label,unit){const valid=readings.map((p,i)=>({date:p.date||p.start,value:cleanNum(p[field]),i})).filter(x=>x.value!==null);if(!valid.length)return '<p class="small">ไม่มีค่าตัวเลขที่แสดงเป็นกราฟได้</p>';const vals=valid.map(v=>v.value),hi=Math.max(...vals,0.001)*1.18,lo=0,w=278,h=114,pad=17;const pos=(v,i)=>[pad+i*(w-2*pad)/Math.max(valid.length-1,1),h-pad-(v.value-lo)/Math.max(hi-lo,.001)*(h-2*pad)];
 let pts=valid.map(pos),path=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");return '<div class="small">'+xesc(label)+' · '+xesc(unit)+'</div><svg class="spark" viewBox="0 0 '+w+' '+h+'"><line x1="17" y1="97" x2="261" y2="97" stroke="#c3dce1"/><path d="'+path+'" fill="none" stroke="#058ba0" stroke-width="2.5"/>'+pts.map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.3" fill="#047d95" stroke="#fff" stroke-width="1.5"/>').join("")+'<text x="5" y="14" font-size="10" fill="#62818b">'+fmt(Math.max(...vals))+'</text><text x="5" y="106" font-size="10" fill="#62818b">0</text></svg><div class="small">'+xesc(thaiDate(valid[0].date))+' → '+xesc(thaiDate(valid.at(-1).date))+' · '+valid.length+' ค่า</div>'}
