@@ -1,5 +1,12 @@
 # The River — GIS Timeline for Surface Water, Sediment, Food & Health
 
+## Distinguishing PCD surface-water data from CR fish sampling points
+
+**Two different observation programs, not duplicate PCD water measurements.** The public layer **"น้ำผิวดิน · กรมควบคุมมลพิษ"** contains 23 rounds of actual PCD river water analyses (KK/SA/RU/NK/FA/KO/LA codes; water As/Pb etc in mg/L and turbidity in NTU). The former generic **"น้ำผิวดิน"** layer is only the **CR1–CR21 station registry** from Dataprepsriver. Its `agency` column identifies **ประมงจังหวัดเชียงราย**, and the records refer to fish/aquatic-biota sampling; the rows do **not** supply station-round water chemistry. The latter is now renamed **"จุดเก็บตัวอย่างปลา"**, off by default, and is retained separately for traceability, not merged by geographic proximity.
+
+Data-quality correction: 21 CR station rows in the source sheet have shifted `max_as_mg_l`, `status`, `notes`, `source_file` cells. A literal `PASS` was present under `max_as_mg_l` and the source filename under `notes`. The public GIS JSON normalizes these as **no water measurement / STATION_ONLY** and restores source attribution. Original Google Sheet remains unchanged.
+
+
 ## PCD Surface Water: Round 23 (26–30 September 2026) — added 28 October 2026
 
 **[Open the live multi-layer GIS Timeline](https://kongsak4807017.github.io/theriver/)** · **[Original PCD PDF on Google Drive](https://drive.google.com/file/d/1va0Tmk_H3ebwGJVgEZi6soLDqhiFjswH/view)**
