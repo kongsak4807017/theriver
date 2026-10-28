@@ -108,6 +108,7 @@ console.log("PASS PCD 23 rounds, 21 As stations in last round, 3 Sai River excee
 // Every marker popup and station-history pane must show source-grounded attribution.
 assert.ok(html.includes("function sourceAttribution(kind,record)"),"Source attribution helper is present");
 assert.ok(html.includes("attributionMarkup(kind,s,false)"),"Popup immediately identifies agency");
+assert.ok(!html.includes("คลิกหมุดเพื่อดูประวัติและอ้างอิง"),"Map popups must not ask the user to click the already-open pin again");
 assert.ok(html.includes("attributionMarkup(sel.kind,attributionRecord,true)"),"History detail identifies agency and source");
 assert.ok(html.includes("ศูนย์วิทยาศาสตร์การแพทย์ที่ 1/1 เชียงราย"),"RMS food and water attribution");
 assert.ok(html.includes("กองโรคจากการประกอบอาชีพและสิ่งแวดล้อม"),"Health report laboratory attribution");
