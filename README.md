@@ -1,5 +1,19 @@
 # The River — GIS Timeline for Surface Water, Sediment, Food & Health
 
+## Fisheries geospatial audit — 28 October 2026
+
+The website now has **one map layer** named **ปลาและสัตว์น้ำ · รวมสถานี CR** rather than two overlapping fish-related map toggles. This is a display/UI merge; the **CR1–CR21 station master data** remains available in `data/gistda/river_stations.geojson` (legacy path; actually fish sampling station references, *not river water chemistry*).
+
+- Original sample source 2025: [สรุปตรวจผักปลา 4 ครั้ง ปี68.xlsx](https://docs.google.com/spreadsheets/d/1mxZSktshxs6wd3RAZDijqZQBMdQ8oTLy/edit).
+- Original 2026 records: reports [01](https://drive.google.com/file/d/1XTzl8Ndwf_eEwG5xIiRtxNyBu8difKQs/view), [02](https://drive.google.com/file/d/1lfkLm1ffuhXsq5g7sB_jy9QB3beisguP/view), [03](https://drive.google.com/file/d/1txScDYlheKx0dFmZ-0p7hrF__OJm1gna/view), [04](https://drive.google.com/file/d/18flb2JitDO1IABbZWPHe2x85m_14c32i/view), [05](https://drive.google.com/file/d/1ViITfUPA0_qyksOx-YYiAdaxZRjosoLE/view), [06](https://drive.google.com/file/d/1MPfxH4HL_SSpNDcFtUOt0kkk8i0NR24e/view), [07](https://drive.google.com/file/d/18OLP91HZHuLf1nRZa4Zl6OccIII8FWvH/view), [08](https://drive.google.com/file/d/1iEzSxnML-qwPmDc8GU9DR9XMHrzj8427/view), [09](https://drive.google.com/file/d/10zob-rNtaz3vKMtw3BMPfm76NBTa7t80/view), [10](https://drive.google.com/file/d/14nGBPSA_ZV8DEDSIQ6wxKEtR5xpIfw5w/view).
+- [Dataprepsriver](https://docs.google.com/spreadsheets/d/1v6tisYHTERwmt6f56IezlLAK5-tqtlTbWYpV3ln6bIg/edit), tabs 2 and 3, is a derived dataset, not an original laboratory report.
+- **192 machine-readable rows ≠ 206 specimens:** FY2568 63 individual rows, FY2569 128 individual records with explicit CR codes + one summary row representing **15 FY2569 round-one fish specimens**. The original round-one PDF contains the specimen-level table which still needs complete individual transcription.
+- For all **128 fish records with explicit CR codes**, the location matches the corresponding CR reference record **exactly**; those are **borrowed reference coordinates**, *not independent fish collection GPS measurements*.
+- The **63 FY2568 observations** and **one FY2569 summary** use regional centroid approximations; **36** uncoded approximate rows coincide numerically with CR reference coordinates. This is **not** evidence of sampling at the CR station.
+- Collection/supply agencies listed in the original reports include provincial/district fisheries staff and primary-care stations; the program is coordinated by the Department of Medical Sciences regional center, PAO and partners. The round-one program report describes sending fish and produce samples to the Food Quality and Safety Bureau for analysis. It is **incorrect** to attribute all fish sampling and lab measurement to the Pollution Control Department.
+- [Machine-readable provenance audit](./data/audits/fish_station_lineage_2026-10-28.json).
+
+
 ## Distinguishing PCD surface-water data from CR fish sampling points
 
 **Two different observation programs, not duplicate PCD water measurements.** The public layer **"น้ำผิวดิน · กรมควบคุมมลพิษ"** contains 23 rounds of actual PCD river water analyses (KK/SA/RU/NK/FA/KO/LA codes; water As/Pb etc in mg/L and turbidity in NTU). The former generic **"น้ำผิวดิน"** layer is only the **CR1–CR21 station registry** from Dataprepsriver. Its `agency` column identifies **ประมงจังหวัดเชียงราย**, and the records refer to fish/aquatic-biota sampling; the rows do **not** supply station-round water chemistry. The latter is now renamed **"จุดเก็บตัวอย่างปลา"**, off by default, and is retained separately for traceability, not merged by geographic proximity.
