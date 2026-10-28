@@ -30,7 +30,7 @@ const fishApprox=data.fish.filter(r=>!/^CR\d{1,2}$/.test(r.station));
 const stationReference=new Map(data.waterStations.filter(r=>r.sample_domain==="aquatic_biota_station_reference").map(r=>[r.id.replace("RIV-CR","CR").replace(/^CR0/,"CR"),r]));
 assert.equal(fishCoded.length,128);assert.equal(fishApprox.length,64);
 assert.equal(stationReference.size,21);
-assert.ok(fishCoded.every(r=>stationReference.has(r.station)&&r.station_join==="verified_code_and_coordinate"));
+assert.ok(fishCoded.every(r=>stationReference.has(r.station)&&r.station_join==="matching_processed_station_code_and_reference_coordinate"));
 assert.ok(fishCoded.every(r=>{const st=stationReference.get(r.station);return st.lat===r.lat&&st.lon===r.lon;}));
 assert.ok(fishApprox.every(r=>r.coordinate_provenance==="area_centroid"));
 assert.ok(data.fish.every(r=>r.source_file_verified&&r.collector_agency));
