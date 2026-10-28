@@ -55,6 +55,33 @@ assert.ok(html.includes('id="dateSlider"')&&html.includes('data-layer="health"')
 assert.ok(html.includes("environment_timeline_v2.json")&&html.includes("sediment_13_rounds.geojson"));
 assert.ok(html.includes("health_population_timeline_public.json")&&html.includes("H.baseline_districts")&&html.includes("H.followup_phases"));
 assert.ok(html.includes('id="healthTimeline"'));
+
+const pcd=load("data/pcd_surface_water_23_rounds.json");
+const pcdGeo=load("data/gistda/pcd_surface_water_timeseries.geojson");
+assert.equal(pcd.schema,"theriver/pcd-surface-water-v1");
+assert.equal(pcd.rounds.length,23);
+assert.equal(pcd.stations.length,29);
+assert.equal(pcd.observations.length,528);
+assert.equal(pcdGeo.features.length,410);
+assert.equal(pcd.stations.filter(s=>s.lat!==null).length,21);
+assert.equal(pcd.observations.filter(r=>r.round===23&&r.values_raw.As!==null).length,21);
+const pcdLatestExceed=pcd.observations.filter(r=>r.round===23&&r.arsenic_status==="EXCEED_STANDARD");
+assert.deepEqual(pcdLatestExceed.map(x=>x.station).sort(),["SA01","SA02","SA03"]);
+assert.deepEqual(pcdLatestExceed.map(x=>x.values_raw.As),["0.017","0.013","0.012"]);
+assert.ok(pcd.observations.some(x=>x.values_raw.As==="<0.010"),"Censored values must remain untouched");
+for(const f of pcdGeo.features){
+  assert.equal(f.type,"Feature");assert.equal(f.geometry.type,"Point");
+  const [lon,lat]=f.geometry.coordinates;assert.ok(lat>=15&&lat<=24&&lon>=96&&lon<=105);
+  assert.match(f.properties.start_date,/^\d{4}-\d{2}-\d{2}$/);assert.match(f.properties.end_date,/^\d{4}-\d{2}-\d{2}$/);
+  if(f.properties.station==="KK01")assert.ok(f.properties.start_date>="2026-05-19","KK01 moved station");
+  if(f.properties.station==="KK12")assert.ok(f.properties.start_date>="2026-02-24","KK12 moved station");
+}
+assert.ok(html.includes('data-layer="surface_water"'));
+assert.ok(html.includes('id="surfaceParam"'));
+assert.ok(html.includes("pcd_surface_water_23_rounds.json"));
+assert.ok(html.includes("W.observations")&&html.includes("surfaceWaterDetail"));
+console.log("PASS PCD 23 rounds, 21 As stations in last round, 3 Sai River exceedances, 410 geofeatures and QA");
+
 const code=html.match(/<script>\n([\s\S]*?)\n<\/script>/);
 assert.ok(code,"Client script must be present");
 new Function(code[1]);
