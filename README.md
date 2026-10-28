@@ -1,4 +1,34 @@
-# The River — GIS Timeline of Heavy Metals in River Sediment
+# The River — GIS Timeline for Surface Water, Sediment, Food & Health
+
+## PCD Surface Water: Round 23 (26–30 September 2026) — added 28 October 2026
+
+**[Open the live multi-layer GIS Timeline](https://kongsak4807017.github.io/theriver/)** · **[Original PCD PDF on Google Drive](https://drive.google.com/file/d/1va0Tmk_H3ebwGJVgEZi6soLDqhiFjswH/view)**
+
+The surface-water layer is independent from drinking-water supplies, fisheries, crops, sediment, and human biomonitoring. It represents **23 PCD sampling rounds from March 2025 to September 2026**, with **29 historic station codes**, **21 stations with coordinates in Appendix C**, **528 station-round observations with at least one reported measurement**, and **410 georeferenced station-round features**. Nine laboratory/field fields are preserved: **As, Pb, Mn, Cd, Hg, Cu, Zn, Ni (mg/L)** and **turbidity (NTU)**.
+
+### Round 23 verified findings
+
+| Area | Arsenic As in surface water (mg/L) | Interpretation from the report |
+|---|---|---|
+| Sai River SA01 | 0.017 | Exceeds 0.010 mg/L |
+| Sai River SA02 | 0.013 | Exceeds 0.010 mg/L |
+| Sai River SA03 | 0.012 | Exceeds 0.010 mg/L |
+| Kok, tributaries, Ruak, Mekong (18 other tested stations) | <0.010 at tested points | Below laboratory reporting threshold |
+
+**Important:** There are **21 stations with arsenic results for round 23** (3 Sai exceed; 18 others <0.010). Another station may have other metal measurements but no reportable As result; the CSV retains it as a separate row with no As measurement. Sampling date is a *window*, not the exact date of each station. A result of `<0.010` is *censored* and is not the numeric value 0. No patient urine measurement may be used as a river water test.
+
+### GIS files for GISTDA / QGIS
+
+- [Public 23-round station history JSON](./data/pcd_surface_water_23_rounds.json) — all 528 observations, raw laboratory strings and quality metadata
+- [PCD water station-and-round GeoJSON (EPSG:4326)](./data/gistda/pcd_surface_water_timeseries.geojson) — 410 geocoded station-round features
+- [PCD surface-water 23-rounds CSV](./data/gistda/pcd_surface_water_23_rounds.csv) — 528 rows, UTF-8 with BOM
+- [September 2026 round-23-only CSV](./data/gistda/pcd_surface_water_latest_2026-09.csv) — includes 22 stations with at least one result; 21 stations have arsenic results
+
+### Report extraction QA / provenance
+
+The report states data *as of 15 Oct 2026, 08:30*. The final appendix C coordinates have an earlier **27 Aug 2026** timestamp in some pages; verify any physical relocation before treating older samples as identical sites. **KK01** moved in May 2026 and **KK12/KK13** were modified in February 2026; the GIS suppresses plotting the current coordinate for earlier incompatible KK01/KK12 rounds. The Mekong turbidity tables (19–20) are mislabeled as arsenic in their headings, but the reported NTU values were mapped as turbidity based on the narrative and Annex B. Five param/station historical series have incomplete table-cell counts and are retained as missing/uncertain rather than being shifted between sampling rounds. Historic surface water results are not, on their own, statements of drinking water safety or causal health effects.
+
+---
 
 > **The River GIS V2 — Environmental & Health Timeline (26 Oct 2026).** เว็บไซต์หน้าแรก `index.html` ขยายจากแผนที่ตะกอนดินเดิมเป็น 7 ประเภทหมุด/6 กลุ่มข้อมูล: ตะกอนดิน, สถานีน้ำผิวดิน CR1–CR21, สถานีน้ำประปา/น้ำโรงเรียน, ปลา, พืชผัก, ข้าว และตัวชี้วัดสุขภาพระดับอำเภอ ปรับเวลาและเปิดประวัติย้อนหลังได้ แผนที่ใช้ Leaflet/OpenStreetMap และ Esri imagery, **ไม่ได้อ้างว่าใช้ GISTDA tile API อย่างเป็นทางการ** แต่ส่งออก GeoJSON WGS84 พร้อมฟิลด์ Timeline เพื่อใช้ใน GISTDA/QGIS ได้
 
