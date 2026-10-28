@@ -101,7 +101,7 @@ health:'<circle cx="9" cy="7" r="3"/><path d="M2 21v-3a7 7 0 0 1 14 0v3M17 4a3 3
 };return '<svg viewBox="0 0 24 24" aria-hidden="true">'+p[kind]+'</svg>';
 }
 function icon(kind,severity,approx){return L.divIcon({className:"",html:'<div class="pin '+severity+(kind==="health"?" health":"")+(approx?" approx":"")+'">'+graphic(kind)+'</div>',iconSize:[39,47],iconAnchor:[20,39]});}
-function isApprox(s){const g=String(s.geostatus||"");return /Centroid|centroid|Province_Summary|School_Cohort|approx|Basin_|candidate/i.test(g);}
+function isApprox(s){const g=String(s.geostatus||"");return /Centroid|centroid|Province_Summary|School_Cohort|approx|Basin_|candidate|conflict/i.test(g);}
 function pointOk(s){return typeof s.lat==="number"&&s.lat>=15&&s.lat<=24&&typeof s.lon==="number"&&s.lon>=96&&s.lon<=105}
 function basinOk(s){const b=$("basin").value;return !b||String(s.basin||s.river||"").includes(b)||s.kind==="health";}
 function coordAllowed(s){return pointOk(s)&&($("approx").checked||!isApprox(s))&&basinOk(s)}
