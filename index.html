@@ -37,7 +37,7 @@ main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:
 </style>
 </head>
 <body>
-<header><div class="brand"><span class="logo">≈</span><div><b>THE RIVER</b><small>ENVIRONMENTAL & HEALTH SURVEILLANCE GIS · เชียงรายและลุ่มน้ำภาคเหนือ</small></div></div><div class="righthead"><span class="pill live">● 6 ชั้นข้อมูล</span><a class="pill" href="gis_timeline_sediment_2025_2026.html">แผนที่ตะกอนดินเดิม</a><a class="pill" href="https://github.com/kongsak4807017/theriver" target="_blank" rel="noopener">GitHub ↗</a></div></header>
+<header><div class="brand"><span class="logo">≈</span><div><b>THE RIVER</b><small>ENVIRONMENTAL & HEALTH SURVEILLANCE GIS · เชียงรายและลุ่มน้ำภาคเหนือ</small></div></div><div class="righthead"><span class="pill live">● 7 กลุ่มข้อมูล</span><a class="pill" href="gis_timeline_sediment_2025_2026.html">แผนที่ตะกอนดินเดิม</a><a class="pill" href="https://github.com/kongsak4807017/theriver" target="_blank" rel="noopener">GitHub ↗</a></div></header>
 <div class="app">
 <aside>
   <h2>แผนที่เฝ้าระวังตามช่วงเวลา</h2>
@@ -50,6 +50,7 @@ main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:
   <h3>ชั้นข้อมูลและไอคอนบนแผนที่</h3>
   <div id="layerToggles">
     <label class="layer"><input type="checkbox" data-layer="sediment" checked><span class="symbol">▤</span><span class="type"><b>ตะกอนดิน</b><small>กรมควบคุมมลพิษ · 13 รอบ</small></span><span class="counter" id="n-sediment">0</span></label>
+    <label class="layer"><input type="checkbox" data-layer="surface_water" checked><span class="symbol">💧</span><span class="type"><b>น้ำผิวดิน · กรมควบคุมมลพิษ</b><small>ผลตรวจจริง 23 รอบ · KK/SA/RU/NK</small></span><span class="counter" id="n-surface_water">0</span></label>
     <label class="layer"><input type="checkbox" data-layer="river" checked><span class="symbol">🌊</span><span class="type"><b>น้ำผิวดิน</b><small>สถานี CR1–CR21</small></span><span class="counter" id="n-river">0</span></label>
     <label class="layer"><input type="checkbox" data-layer="tap_water" checked><span class="symbol">🚰</span><span class="type"><b>น้ำประปา</b><small>น้ำประปาชุมชน/หมู่บ้าน/โรงเรียน</small></span><span class="counter" id="n-tap_water">0</span></label>
     <label class="layer"><input type="checkbox" data-layer="fish" checked><span class="symbol">🐟</span><span class="type"><b>ปลาและสัตว์น้ำ</b><small>ผลตรวจโลหะหนักรายชนิด</small></span><span class="counter" id="n-fish">0</span></label>
@@ -61,12 +62,13 @@ main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:
     <div class="field"><span>ธาตุในตะกอนดิน</span><select id="metal"><option>As</option><option>Cd</option><option>Pb</option><option>Hg</option><option>Cr</option><option>Ni</option><option>Cu</option><option>Mn</option><option>Zn</option></select></div>
     <div class="field"><span>แม่น้ำ/ลุ่มน้ำ</span><select id="basin"><option value="">ทั้งหมด</option><option value="กก">กก</option><option value="สาย">สาย</option><option value="รวก">รวก</option><option value="โขง">โขง</option><option value="ฝาง">ฝาง</option><option value="ลาว">ลาว</option><option value="กรณ์">กรณ์</option></select></div>
   </div>
+  <div class="controls" style="margin-top:10px"><div class="field"><span>ค่าตรวจน้ำผิวดินของกรมควบคุมมลพิษ</span><select id="surfaceParam"><option value="As">สารหนู (As) · mg/L</option><option value="Pb">ตะกั่ว (Pb) · mg/L</option><option value="turbidity">ความขุ่น · NTU</option><option value="Mn">แมงกานีส (Mn) · mg/L</option><option value="Cd">แคดเมียม (Cd) · mg/L</option><option value="Hg">ปรอท (Hg) · mg/L</option><option value="Cu">ทองแดง (Cu) · mg/L</option><option value="Zn">สังกะสี (Zn) · mg/L</option><option value="Ni">นิกเกิล (Ni) · mg/L</option></select></div></div>
   <div class="controls" style="margin-top:10px"><label class="small"><input id="approx" type="checkbox" checked> รวมจุดพิกัดประมาณ (centroid)</label></div>
-  <h3>รายละเอียดจุดที่เลือก / Station history</h3>
+  <h3>สรุปผลน้ำผิวดิน · รายงาน PCD</h3><div class="panel" id="surfaceWaterSummary"><span class="small">แสดงเมื่อเลือกวันใน Timeline</span></div><h3>รายละเอียดจุดที่เลือก / Station history</h3>
   <div class="panel" id="details">เลือกหมุดบนแผนที่เพื่อดูค่าตรวจวัด ประวัติย้อนหลัง และข้อมูลอ้างอิง</div>
   <h3>สถานการณ์สุขภาพประชาชน</h3><div class="panel" id="healthTimeline"><span class="small">เลือกวันใน Timeline เพื่อดูยอดรวมและกิจกรรมเฝ้าระวัง</span></div><h3>เหตุการณ์สำคัญในช่วงเวลาที่เลือก</h3><div id="events"></div>
-  <div class="notice"><b>การตีความและความเป็นส่วนตัว</b><br>ไอคอนแสดงประเภทตัวอย่าง สีแสดงสถานะภายในมาตรฐานของแต่ละหมวด ไม่ใช่ระดับความเสี่ยงสุขภาพโดยตรง พิกัดศูนย์กลางพื้นที่ใช้เพื่อการมองภาพรวมเท่านั้น ผลตรวจคนเผยแพร่เฉพาะระดับอำเภอ ปกปิดจำนวนผลเกินค่าอ้างอิง 1–4 ราย พ.ศ. 2568 Total As และ พ.ศ. 2569 ผลติดตามคนละบริบทและไม่ควรนำมาเทียบแนวโน้มตรง ๆ ค่า 130.64/56.3 µg/L ในรายงานกรณีติดตามเป็นค่าปัสสาวะ ไม่ใช่ผลตรวจแม่น้ำ</div>
-  <p class="small">แหล่งข้อมูล: <a href="https://docs.google.com/spreadsheets/d/1v6tisYHTERwmt6f56IezlLAK5-tqtlTbWYpV3ln6bIg/edit" target="_blank" rel="noopener">Dataprepsriver (Google Sheets)</a>, รายงานกรมควบคุมมลพิษ · <a href="data/environment_timeline_v2.json">ดาวน์โหลดชุดข้อมูล GIS JSON</a> · <a href="data/sediment_13_rounds.geojson">GeoJSON ตะกอนดิน</a></p>
+  <div class="notice"><b>การตีความและความเป็นส่วนตัว</b><br>ไอคอนแสดงประเภทตัวอย่าง สีแสดงสถานะภายในมาตรฐานของแต่ละหมวด ไม่ใช่ระดับความเสี่ยงสุขภาพโดยตรง พิกัดศูนย์กลางพื้นที่ใช้เพื่อการมองภาพรวมเท่านั้น ผลตรวจคนเผยแพร่เฉพาะระดับอำเภอ ปกปิดจำนวนผลเกินค่าอ้างอิง 1–4 ราย พ.ศ. 2568 Total As และ พ.ศ. 2569 ผลติดตามคนละบริบทและไม่ควรนำมาเทียบแนวโน้มตรง ๆ ค่า 130.64/56.3 µg/L ในรายงานกรณีติดตามเป็นค่าปัสสาวะ ไม่ใช่ผลตรวจแม่น้ำ และค่า &lt;0.010 ในน้ำผิวดินหมายถึงต่ำกว่าขีดรายงาน ไม่ใช่ศูนย์</div>
+  <p class="small">แหล่งข้อมูล: <a href="https://drive.google.com/file/d/1va0Tmk_H3ebwGJVgEZi6soLDqhiFjswH/view" target="_blank" rel="noopener">รายงานน้ำผิวดิน PCD รอบที่ 23</a>, <a href="data/gistda/pcd_surface_water_timeseries.geojson">GeoJSON น้ำผิวดิน 23 รอบ</a> · <a href="https://docs.google.com/spreadsheets/d/1v6tisYHTERwmt6f56IezlLAK5-tqtlTbWYpV3ln6bIg/edit" target="_blank" rel="noopener">Dataprepsriver (Google Sheets)</a>, รายงานกรมควบคุมมลพิษ · <a href="data/environment_timeline_v2.json">ดาวน์โหลดชุดข้อมูล GIS JSON</a> · <a href="data/sediment_13_rounds.geojson">GeoJSON ตะกอนดิน</a></p>
 </aside>
 <main>
   <div id="map"></div>
@@ -81,8 +83,8 @@ main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:
 (function(){
 "use strict";
 const $=id=>document.getElementById(id),xesc=x=>String(x===null||x===undefined?"—":x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let E,S,H,map,layerGroups={},currentDate="",times=[],idx=0,playTimer=null,baseMode=0,detailSelection=null;
-const keyLayers=["sediment","river","tap_water","fish","vegetable","rice","health"];
+let E,S,H,W,map,layerGroups={},currentDate="",times=[],idx=0,playTimer=null,baseMode=0,detailSelection=null;
+const keyLayers=["sediment","surface_water","river","tap_water","fish","vegetable","rice","health"];
 const colors={severe:"#d34b54",warn:"#e89b3c",good:"#269b7f",unknown:"#8ca2ab"};
 const thaiDate=d=>{if(!d)return "ไม่มีวันที่";const a=d.split("-");return Number(a[2])+" "+["","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(a[1])]+" "+(Number(a[0])+543)};
 const cleanNum=v=>typeof v==="number"&&Number.isFinite(v)?v:null;
@@ -91,6 +93,7 @@ function graphic(kind){
 const p={
 sediment:'<path d="M3 8 12 4 21 8 12 12 3 8ZM3 13l9 4 9-4M3 18l9 4 9-4"/>',
 river:'<path d="M2 7q4-4 8 0t8 0t5 0M2 14q4-4 8 0t8 0t5 0M2 20q4-4 8 0t8 0t5 0"/>',
+surface_water:'<path d="M12 2C8 8 5 11 5 15a7 7 0 0 0 14 0c0-4-3-7-7-13Z"/><path d="M8 15c1 2 2 3 4 3"/>',
 tap_water:'<path d="M7 20h10M9 20V10l3-3 3 3v10M5 11V5h14v6M7 5V3h10v2M10 13h4M19 14v5"/><path d="M19 20q3-3 0-6"/>',
 fish:'<path d="M3 12c5-7 12-7 16 0-4 7-11 7-16 0ZM3 12l-2-5v10l2-5ZM15 11h.1M9 7l-1-3M11 17l-1 3"/>',
 vegetable:'<path d="M12 21V11M12 16C4 16 3 10 4 6c5 0 8 3 8 10ZM12 13c0-7 4-10 9-11 1 7-2 11-9 11Z"/>',
@@ -103,7 +106,7 @@ function isApprox(s){const g=String(s.geostatus||"");return /Centroid|centroid|P
 function pointOk(s){return typeof s.lat==="number"&&s.lat>=15&&s.lat<=24&&typeof s.lon==="number"&&s.lon>=96&&s.lon<=105}
 function basinOk(s){const b=$("basin").value;return !b||String(s.basin||s.river||"").includes(b)||s.kind==="health";}
 function coordAllowed(s){return pointOk(s)&&($("approx").checked||!isApprox(s))&&basinOk(s)}
-function sev(st){if(st==="EXCEED_STANDARD"||st==="severe")return "severe";if(st==="WATCHLIST"||st==="WATCHLIST_BORDERLINE"||st==="WATCHLIST_DOH_TAP"||st==="elevated")return "warn";if(st==="PASS"||st==="safe")return "good";return "unknown"}
+function sev(st){if(st==="EXCEED_STANDARD"||st==="severe")return "severe";if(st==="WATCHLIST"||st==="WATCHLIST_BORDERLINE"||st==="WATCHLIST_DOH_TAP"||st==="elevated")return "warn";if(st==="PASS"||st==="safe"||st==="BELOW_REPORTING_LIMIT"||st==="BELOW_STANDARD")return "good";if(st==="AT_THRESHOLD")return "warn";return "unknown"}
 function stationHistory(station){return E.tapReadings.filter(q=>q.station===station).sort((a,b)=>a.start.localeCompare(b.start))}
 function tapValue(r){const as=cleanNum(r.as),pb=cleanNum(r.pb);return as!==null?"As "+fmt(as)+" mg/L":pb!==null?"Pb "+fmt(pb)+" mg/L":"ไม่มีค่าตัวเลข"}
 function lastBefore(items,when){return items.filter(x=>x.start<=when).sort((a,b)=>a.start.localeCompare(b.start)).at(-1)}
@@ -112,10 +115,27 @@ function add(kind,s,label,summary,date,sel,status){if(!coordAllowed(s))return fa
 function makeChart(readings,field,label,unit){const valid=readings.map((p,i)=>({date:p.date||p.start,value:cleanNum(p[field]),i})).filter(x=>x.value!==null);if(!valid.length)return '<p class="small">ไม่มีค่าตัวเลขที่แสดงเป็นกราฟได้</p>';const vals=valid.map(v=>v.value),hi=Math.max(...vals,0.001)*1.18,lo=0,w=278,h=114,pad=17;const pos=(v,i)=>[pad+i*(w-2*pad)/Math.max(valid.length-1,1),h-pad-(v.value-lo)/Math.max(hi-lo,.001)*(h-2*pad)];
 let pts=valid.map(pos),path=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");return '<div class="small">'+xesc(label)+' · '+xesc(unit)+'</div><svg class="spark" viewBox="0 0 '+w+' '+h+'"><line x1="17" y1="97" x2="261" y2="97" stroke="#c3dce1"/><path d="'+path+'" fill="none" stroke="#058ba0" stroke-width="2.5"/>'+pts.map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.3" fill="#047d95" stroke="#fff" stroke-width="1.5"/>').join("")+'<text x="5" y="14" font-size="10" fill="#62818b">'+fmt(Math.max(...vals))+'</text><text x="5" y="106" font-size="10" fill="#62818b">0</text></svg><div class="small">'+xesc(thaiDate(valid[0].date))+' → '+xesc(thaiDate(valid.at(-1).date))+' · '+valid.length+' ค่า</div>'}
 function tableRows(arr){return '<div style="max-height:190px;overflow:auto"><table style="border-collapse:collapse;width:100%;font-size:11px"><tbody>'+arr.map(x=>'<tr style="border-bottom:1px solid #dcebed"><td style="padding:5px">'+xesc(x[0])+'</td><td style="padding:5px;text-align:right">'+xesc(x[1])+'</td></tr>').join("")+'</tbody></table></div>'}
+
+function waterUnit(p){return p==="turbidity"?"NTU":"mg/L"}
+function waterParamStatus(p,raw){if(raw===null||raw===undefined||raw==="-")return "unknown";const limits={As:0.01,Pb:0.05,Mn:1};const limit=limits[p];if(limit===undefined)return "unknown";const v=Number(String(raw).replace("<",""));if(!Number.isFinite(v))return "unknown";if(String(raw).startsWith("<"))return v<=limit?"good":"unknown";return v>limit?"severe":v===limit?"warn":"good"}
+function waterCoordValid(o){if(o.latitude===null||o.longitude===null)return false;if(o.station==="KK01"&&o.round<19)return false;if(o.station==="KK12"&&o.round<16)return false;return true}
+function waterStationHistory(id){return W.observations.filter(o=>o.station===id&&o.start_date<=currentDate).sort((a,b)=>a.round-b.round)}
+function surfaceWaterDetail(station){
+const hist=waterStationHistory(station);if(!hist.length)return "";
+const now=hist.at(-1),param=$("surfaceParam").value,raw=now.values_raw[param],lim=({As:0.01,Pb:0.05,Mn:1})[param];
+const chartData=hist.map(o=>({start:o.start_date,v:(typeof o.values_raw[param]==="string"&&!o.values_raw[param].startsWith("<"))?Number(o.values_raw[param].replace(/,/g,"")):null}));
+const source='<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1va0Tmk_H3ebwGJVgEZi6soLDqhiFjswH/view">ต้นฉบับรายงานกรมควบคุมมลพิษ รอบที่ 23</a>';
+return '<b>💧 '+xesc(station)+' · '+xesc(now.station_name)+'</b><p>น้ำผิวดินแม่น้ำ'+xesc(now.river)+' · ผลล่าสุดรอบที่ '+now.round+' ('+thaiDate(now.start_date)+'–'+thaiDate(now.end_date)+')</p>'
++'<div class="kv"><span>'+xesc(param)+'</span><b>'+xesc(raw)+' '+waterUnit(param)+'</b><span>สถานะ</span><span>'+xesc(waterParamStatus(param,raw)==="severe"?"สูงกว่าเกณฑ์":waterParamStatus(param,raw)==="good"?"ไม่สูงกว่าเกณฑ์/ต่ำกว่าขีดรายงาน":waterParamStatus(param,raw)==="warn"?"ค่าเท่าขอบเกณฑ์":"ไม่มีเกณฑ์หรือยังไม่ทราบ")+'</span><span>เกณฑ์</span><span>'+(lim===undefined?"ไม่แสดงเกณฑ์":xesc(lim)+" mg/L")+'</span><span>ความขุ่น</span><span>'+xesc(now.values_raw.turbidity)+' NTU</span><span>ตะกั่ว (Pb)</span><span>'+xesc(now.values_raw.Pb)+' mg/L</span></div>'
++makeChart(chartData,"v",param,waterUnit(param))
++tableRows(hist.slice(-12).reverse().map(o=>["รอบ "+o.round+" · "+thaiDate(o.start_date),o.values_raw[param]===null?"ไม่ตรวจ":o.values_raw[param]]))
++'<p class="small">กราฟเว้นค่าต่ำกว่าขีดรายงาน (&lt;), ไม่แทนเป็นศูนย์ · ช่วงวันเป็นรอบการเก็บตัวอย่าง ไม่ใช่วันที่ของสถานีรายจุด</p><p class="small">'+source+'</p>';
+}
 function selectDetail(sel){detailSelection=sel;let html="";let id=sel.id||sel.key;
 if(sel.kind==="sediment"){const arr=S.features.filter(f=>f.properties.station===id).filter(f=>f.properties.representative_date<=currentDate).sort((a,b)=>a.properties.representative_date.localeCompare(b.properties.representative_date));const last=arr.at(-1);if(!last)return;const metal=$("metal").value;html='<b>'+xesc(id)+' · '+xesc(last.properties.name)+'</b><p>แม่น้ำ'+xesc(last.properties.river)+' · รอบที่ '+last.properties.round+' · '+xesc(last.properties.sampling_window)+'</p><div class="kv"><span>'+metal+'</span><b>'+xesc(last.properties.metals_raw[metal])+' mg/kg</b><span>หน่วย</span><span>ตะกอนดินน้ำหนักแห้ง</span></div>'+makeChart(arr.map(f=>({date:f.properties.representative_date,value:f.properties.metals_mg_kg[metal]})),"value",metal,"mg/kg")+tableRows(arr.slice(-9).reverse().map(f=>[thaiDate(f.properties.representative_date),f.properties.metals_raw[metal]]))+'<p class="small">'+xesc(last.properties.note||"")+'</p>';}
 else if(sel.kind==="tap_water"){const st=E.waterStations.find(a=>a.id===id);if(!st)return;const arr=stationHistory(id).filter(r=>r.start<=currentDate);const last=arr.at(-1);const param=$("metal").value==="Pb"?"pb":"as";html='<b>'+xesc(st.name)+'</b><p>'+xesc(st.district)+' · '+xesc(st.subdistrict)+'</p><div class="kv"><span>ประเภท</span><span>น้ำประปา/หมู่บ้าน</span><span>รอบล่าสุด</span><b>'+(last?xesc(thaiDate(last.start)):"ไม่มีผล")+'</b><span>ผล Pb/As</span><b>'+(last?('Pb '+fmt(last.pb)+' / As '+fmt(last.as)):"—")+'</b><span>เกณฑ์รอบนี้</span><span>'+(last?fmt(last.threshold):"—")+' mg/L</span></div>'+makeChart(arr,param,param.toUpperCase(),"mg/L")+tableRows(arr.slice(-10).reverse().map(v=>[thaiDate(v.start)+' (รอบ '+v.round+')','Pb '+fmt(v.pb)+' · As '+fmt(v.as)]))+'<p class="small">วันที่เป็นช่วงตรวจของรอบ ไม่ใช่วันเก็บตัวอย่างจริงรายสถานี; ค่าต่ำกว่าขีดรายงานไม่เท่ากับศูนย์</p>';}
 else if(sel.kind==="river"){const st=E.waterStations.find(s=>s.id===id);html='<b>'+xesc(st.name)+'</b><p>สถานีเฝ้าระวังน้ำผิวดิน ('+xesc(st.id)+')</p><p>'+xesc(st.notes)+'</p><p class="small">จุดเก็บตัวอย่าง ไม่มีค่าตรวจน้ำรายรอบที่ยืนยันได้ในชุดนี้ ห้ามตีความเป็นผลตรวจปกติ</p>';}
+else if(sel.kind==="surface_water"){html=surfaceWaterDetail(id);}
 else if(sel.kind==="health"){const newest=E.healthDistricts.find(x=>x.district===sel.district),base=H.baseline_districts.find(x=>x.district===sel.district),showNew=currentDate>="2026-07-14"&&newest;html='<b>เฝ้าระวังสุขภาพ · อ.'+xesc(sel.district)+'</b><p class="small">พิกัดศูนย์กลางอำเภอ ไม่ใช่บ้านหรือจุดเก็บตัวอย่าง</p>';
 if(base&&currentDate>=base.start)html+='<div class="kv"><span>ปี 2568</span><b>Total As (ปัสสาวะ)</b><span>คัดกรองความเสี่ยง</span><span>'+fmt(base.screened)+' ราย</span><span>เก็บปัสสาวะ</span><span>'+fmt(base.urine_collected)+' ราย</span></div>';
 if(base&&(base.urine_collected!==base.slide_feb_2026||base.urine_collected!==base.slide_oct_2026))html+='<div class="notice"><b>การทวนสอบการนับรายอำเภอ</b><br>ทะเบียน '+fmt(base.urine_collected)+' ราย · สไลด์ 24 ก.พ. 2569 '+fmt(base.slide_feb_2026)+' ราย · สไลด์ 21 ต.ค. 2569 '+fmt(base.slide_oct_2026)+' ราย<br>ยอดรวมจังหวัดตรงกัน แต่มีการจัดกลุ่มระหว่างเมืองเชียงรายกับเวียงชัยต่างกัน ใช้จำนวนจากทะเบียนในการปักหมุด</div>';
@@ -130,6 +150,13 @@ currentDate=times[idx]||"2026-10-16";$("dateShow").textContent=thaiDate(currentD
 let counts=Object.fromEntries(keyLayers.map(k=>[k,0]));keyLayers.forEach(k=>layerGroups[k].clearLayers());
 const sedimentMap={};for(const f of S.features){const p=f.properties;if(p.representative_date>currentDate)continue;if(p.station==="KK01"&&p.representative_date<"2026-05-01")continue;const k=p.station; if(!sedimentMap[k]||sedimentMap[k].properties.representative_date<p.representative_date)sedimentMap[k]=f;}
 Object.values(sedimentMap).forEach(f=>{const p=f.properties,v=p.metals_mg_kg[$("metal").value],raw=p.metals_raw[$("metal").value];let st="unknown";if($("metal").value==="As"&&v!==null){st=v>33?"severe":v>=10?"elevated":"safe"}if(add("sediment",{lat:f.geometry.coordinates[1],lon:f.geometry.coordinates[0],geostatus:p.geostatus,basin:p.river},p.station+" · "+p.name,$("metal").value+" = "+raw+" mg/kg (เก็บรอบ "+p.round+")",p.representative_date,{kind:"sediment",id:p.station},st))counts.sediment++});
+
+const pcdParam=$("surfaceParam").value,waterLatest={};
+for(const w of W.observations){if(w.start_date>currentDate||!waterCoordValid(w))continue;if(!waterLatest[w.station]||waterLatest[w.station].round<w.round)waterLatest[w.station]=w;}
+for(const w of Object.values(waterLatest)){const raw=w.values_raw[pcdParam],unit=waterUnit(pcdParam);const q={lat:w.latitude,lon:w.longitude,basin:w.river,geostatus:"station_coordinate"};if(add("surface_water",q,"PCD "+w.station+" · "+w.station_name,pcdParam+" = "+(raw===null?"ไม่ตรวจ":raw)+" "+unit+" · รอบที่ "+w.round+" ("+thaiDate(w.start_date)+")",w.start_date,{kind:"surface_water",id:w.station},waterParamStatus(pcdParam,raw)))counts.surface_water++;}
+const recentRound=W.rounds.filter(x=>x.start_date<=currentDate).at(-1),roundNum=recentRound?recentRound.round:0,roundData=W.observations.filter(x=>x.round===roundNum&&x.values_raw.As!==null);
+const exceedWater=roundData.filter(x=>waterParamStatus("As",x.values_raw.As)==="severe");
+$("surfaceWaterSummary").innerHTML=roundNum?'<b>PCD รอบที่ '+roundNum+' · '+thaiDate(recentRound.start_date)+'–'+thaiDate(recentRound.end_date)+'</b><div class="kv"><span>สถานีที่มีผล As</span><b>'+roundData.length+' จุด</b><span>As สูงกว่า 0.010</span><b style="color:'+(exceedWater.length?"#b33142":"#1b826a")+'">'+exceedWater.length+' จุด</b><span>พบที่</span><span>'+xesc(exceedWater.map(x=>x.station).join(", ")||"ไม่พบจุดที่สูงกว่าเกณฑ์")+'</span></div><p class="small">เป็นผลตรวจน้ำผิวดิน ไม่ใช่น้ำประปาหรือการตรวจคน · <a href="data/pcd_surface_water_23_rounds.json">ดูชุดข้อมูล 23 รอบ</a></p>':'<span class="small">ยังไม่มีข้อมูล PCD ในช่วงเวลานี้</span>';
 const taps=E.waterStations.filter(s=>s.type==="tap_water"||s.type==="school_water"),tapMap={};for(const r of E.tapReadings){if(r.start<=currentDate&&( !tapMap[r.station]||r.start>tapMap[r.station].start))tapMap[r.station]=r;}
 E.waterStations.filter(s=>s.type==="river").forEach(s=>{if(s.start&&s.start>currentDate)return;if(add("river",s,s.id+" · "+s.name,"สถานีเก็บตัวอย่างน้ำผิวดิน; ไม่ใช่ผลตรวจน้ำรายรอบ",s.start,{kind:"river",id:s.id},"unknown"))counts.river++});
 for(const s of taps){if(s.start&&s.start>currentDate)continue;let r=tapMap[s.id],status=r?r.status:(s.type==="school_water"&&s.end&&s.end<=currentDate?"PASS":"UNRATED");let txt=s.type==="school_water"?"น้ำโรงเรียน (ผลจากรายงานสรุป)":r?tapValue(r):"ยังไม่มีผลรายรอบ";if(add("tap_water",s,s.name,txt,r?r.start:s.start,{kind:"tap_water",id:s.id},status))counts.tap_water++;}
@@ -149,13 +176,13 @@ const osm=L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZ
 const satellite=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Imagery © Esri, Maxar, Earthstar Geographics"});
 osm.addTo(map);window.__theriverMap=map;
 keyLayers.forEach(k=>{layerGroups[k]=L.layerGroup().addTo(map)});
-const [e,s,h]=await Promise.all([fetch("data/environment_timeline_v2.json",{cache:"no-cache"}),fetch("data/sediment_13_rounds.geojson",{cache:"no-cache"}),fetch("data/health_population_timeline_public.json",{cache:"no-cache"})]);if(!e.ok||!s.ok||!h.ok)throw Error("HTTP "+e.status+"/"+s.status+"/"+h.status);
-E=await e.json();S=await s.json();H=await h.json();
-const all=[...E.events.flatMap(x=>[x.start,x.end]),...E.tapReadings.map(x=>x.start),...E.fish.map(x=>x.start),...E.crops.map(x=>x.start),...E.healthDistricts.map(x=>x.start),...H.followup_phases.map(x=>x.start),...H.baseline_districts.map(x=>x.start),...S.features.map(x=>x.properties.representative_date),"2026-10-16"].filter(Boolean);times=Array.from(new Set(all)).sort();idx=times.length-1;
+const [e,s,h,w]=await Promise.all([fetch("data/environment_timeline_v2.json",{cache:"no-cache"}),fetch("data/sediment_13_rounds.geojson",{cache:"no-cache"}),fetch("data/health_population_timeline_public.json",{cache:"no-cache"}),fetch("data/pcd_surface_water_23_rounds.json",{cache:"no-cache"})]);if(!e.ok||!s.ok||!h.ok||!w.ok)throw Error("HTTP "+e.status+"/"+s.status+"/"+h.status+"/"+w.status);
+E=await e.json();S=await s.json();H=await h.json();W=await w.json();
+const all=[...E.events.flatMap(x=>[x.start,x.end]),...E.tapReadings.map(x=>x.start),...E.fish.map(x=>x.start),...E.crops.map(x=>x.start),...E.healthDistricts.map(x=>x.start),...H.followup_phases.map(x=>x.start),...H.baseline_districts.map(x=>x.start),...W.rounds.map(x=>x.start_date),...S.features.map(x=>x.properties.representative_date),"2026-10-16"].filter(Boolean);times=Array.from(new Set(all)).sort();idx=times.length-1;
 for(const k of ["dateSlider","dateSliderBottom"]){$(k).max=String(times.length-1);$(k).value=String(idx);$(k).addEventListener("input",e=>{idx=Number(e.target.value);render()})}
 $("play").addEventListener("click",()=>{if(playTimer){clearInterval(playTimer);playTimer=null;$("play").textContent="▶ เล่น Timeline";return}if(idx>=times.length-1)idx=0;$("play").textContent="Ⅱ หยุด";playTimer=setInterval(()=>{if(idx>=times.length-1){clearInterval(playTimer);playTimer=null;$("play").textContent="▶ เล่น Timeline";return}idx++;render()},Number($("speed").value))});
 $("speed").addEventListener("change",()=>{if(playTimer){clearInterval(playTimer);playTimer=null;$("play").textContent="▶ เล่น Timeline"}});
-$("latest").onclick=()=>{idx=times.length-1;render()};$("metal").onchange=()=>render();$("basin").onchange=()=>render();$("approx").onchange=()=>render();
+$("latest").onclick=()=>{idx=times.length-1;render()};$("metal").onchange=()=>render();$("surfaceParam").onchange=()=>render();$("basin").onchange=()=>render();$("approx").onchange=()=>render();
 document.querySelectorAll("[data-layer]").forEach(el=>el.addEventListener("change",()=>{const lg=layerGroups[el.dataset.layer];el.checked?map.addLayer(lg):map.removeLayer(lg)}));
 $("basemap").onclick=()=>{baseMode=1-baseMode;if(baseMode){map.removeLayer(osm);satellite.addTo(map);satellite.bringToBack();$("basemap").textContent="🗺 แผนที่ถนน"}else{map.removeLayer(satellite);osm.addTo(map);osm.bringToBack();$("basemap").textContent="🛰 ดาวเทียม"}};
 $("fit").onclick=()=>map.fitBounds([[19.3,99.1],[20.62,100.65]],{padding:[15,15]});
