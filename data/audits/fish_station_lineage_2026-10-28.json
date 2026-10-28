@@ -4,14 +4,15 @@
   "verification_method": "Compare row IDs, station codes, and stored coordinates between Dataprepsriver tabs 2/3 and GitHub JSON; validate examples and sampling roles from original 2025 XLSX and 2026 round 1, 2, 6 laboratory PDFs. No independent GPS track exists in these sources. A targeted check of the source round 02 PDF showed its first two fish entries describe locations verbally without printing a CR code; their CR1/CR3 assignment occurs in the derived processed sheet. Thus all 128 station joins are confirmed against the processed station master, not universally proven in source PDFs.",
   "source_data": {
     "sampling_station_rows": 21,
-    "fish_data_rows": 192,
+    "fish_data_rows": 206,
     "fish_samples_in_reports": 206,
     "fy2025_rows": 63,
-    "fy2026_rows": 129,
+    "fy2026_rows": 143,
     "fy2026_individual_station_rows": 128,
-    "fy2026_first_round_summary_rows": 1,
-    "fy2026_first_round_samples_represented_by_summary": 15,
-    "physical_samples_2026": 143
+    "fy2026_first_round_summary_rows": 0,
+    "fy2026_first_round_samples_represented_by_summary": 0,
+    "physical_samples_2026": 143,
+    "fy2026_first_round_individual_rows": 15
   },
   "spatial_join": {
     "explicit_CR_station_code_and_identical_reference_coordinates": 128,
@@ -24,7 +25,9 @@
     "warning": "128 fish observation coordinates are copied from the 21-station CR reference table. 36 uncoded approximate points have the same numeric lat/lon as some CR reference points, but that is not evidence of site identity. Never link uncoded records using coordinates alone.",
     "station_code_provenance": "128 processed records have a CR code; report 02 examples show codes may be assigned during data preparation rather than printed in original source documents. No blanket assertion that all 128 original PDFs explicitly record a CR code.",
     "source_document_GPS_precision": "No individual fish-capture GPS coordinate independent of CR station master was verified.",
-    "CR_code_in_processed_fish_records": 128
+    "CR_code_in_processed_fish_records": 128,
+    "round1_inferred_reference_from_location_text": 9,
+    "round1_unlocated": 6
   },
   "institutions": {
     "station_reference_agency": "ประมงจังหวัดเชียงราย in Dataprepsriver station registry",
@@ -35,7 +38,7 @@
   },
   "source_files": {
     "สรุปตรวจผักปลา 4 ครั้ง ปี68.xlsx": 63,
-    "01 ผลการตรวจวิเคราะห์ฯ.pdf | 21 ตค 69 (1).pdf": 1,
+    "01 ผลการตรวจวิเคราะห์ฯ.pdf | 21 ตค 69 (1).pdf": 0,
     "02 ผลการตรวจวิเคราะห์ฯ.pdf": 11,
     "03 ผลการตรวจวิเคราะห์ฯ.pdf": 19,
     "04 ผลการตรวจวิเคราะห์ฯ.pdf": 22,
@@ -44,7 +47,8 @@
     "07 ผลการตรวจวิเคราะห์ฯ.pdf": 10,
     "08 ผลการตรวจวิเคราะห์ฯ.pdf": 9,
     "09 ผลการตรวจวิเคราะห์ฯ.pdf": 7,
-    "10 ผลการตรวจวิเคราะห์ฯ.pdf": 7
+    "10 ผลการตรวจวิเคราะห์ฯ.pdf": 7,
+    "01 ผลการตรวจวิเคราะห์ฯ.pdf": 15
   },
   "sources": [
     {
@@ -127,12 +131,12 @@
     }
   ],
   "limitations": [
-    "2026 first round 15 individual fish samples are preserved only as a single summary row in public dataset; species/individual values from the 15 samples are not yet machine readable in this GIS.",
     "FY2025 fish sampling coordinates are district/subdistrict approximations and often appear identical to CR coordinates due to secondary geocoding.",
     "Several fish results are non-detect/censored text; values must not be imputed as zeros.",
     "Observed 192 records are not the same unit as 206 reported specimens.",
     "CR station references are useful as lookup/master data but do not need a separate map marker layer when every CR code has fish observation rows.",
-    "The original November 2025 (FY2569 round 2) report gives first two fish sampling sites by location description, whereas the processed sheet maps them to CR1/CR3. Confirm CR crosswalk against independent station field logs before using as exact sampling GPS."
+    "The original November 2025 (FY2569 round 2) report gives first two fish sampling sites by location description, whereas the processed sheet maps them to CR1/CR3. Confirm CR crosswalk against independent station field logs before using as exact sampling GPS.",
+    "October 2025 round-one specimens have now been transcribed (15 individual results from original PDF pp14–16). Nine borrowed CR station reference coordinates are inferred by location name only; six specimen rows intentionally omit coordinates and GeoJSON features."
   ],
-  "recommended_ui": "One fish & aquatic biota results layer using station CR codes when explicit; include the station reference in popups, distinguish approximated legacy locations, and retain a standalone reference master in data/gistda/river_stations.geojson for GIS import."
+  "recommended_ui": "Public fish layer label ปลาและสัตว์น้ำ; CR station reference retained as internal master only. Original source PDF did not print CR codes or GPS for first-round fish. 206 result rows; 200 mapped features."
 }
