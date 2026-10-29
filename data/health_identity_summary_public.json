@@ -1,0 +1,85 @@
+{
+  "schema": "theriver/health-identity-aggregate-v1",
+  "generated": "2026-10-29",
+  "source_snapshot": "2026-10-28",
+  "unit": "laboratory_result_events_not_unique_people",
+  "registry_rows": 641,
+  "identity_coverage": {
+    "valid_national_id_checksum_rows": 237,
+    "missing_or_invalid_national_id_rows": 404,
+    "distinct_identifiers_with_valid_checksum": 237,
+    "interpretation": "Validation of ID format only; not registry verification"
+  },
+  "kpis": {
+    "unique_persons": {
+      "value": null,
+      "verified_subset": 237,
+      "status": "PARTIAL_LINKAGE"
+    },
+    "newly_screened": {
+      "value": null,
+      "status": "NOT_ESTABLISHED"
+    },
+    "followup_persons": {
+      "value": null,
+      "status": "NOT_ESTABLISHED"
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "date": "2025-07-22",
+      "result_events": 322,
+      "first_observed_rows": 322,
+      "repeat_events_in_same_row": 0,
+      "linked_repeat_events": 0,
+      "status": "REPORTED"
+    },
+    {
+      "round": 2,
+      "date": "2025-10-09",
+      "result_events": 7,
+      "first_observed_rows": 0,
+      "repeat_events_in_same_row": 7,
+      "linked_repeat_events": 5,
+      "status": "REPORTED"
+    },
+    {
+      "round": 3,
+      "date": "2025-10-29",
+      "result_events": 2,
+      "first_observed_rows": 1,
+      "repeat_events_in_same_row": 1,
+      "linked_repeat_events": 1,
+      "status": "REPORTED"
+    },
+    {
+      "round": 4,
+      "date": "2026-03-06",
+      "result_events": 31,
+      "first_observed_rows": 26,
+      "repeat_events_in_same_row": 5,
+      "linked_repeat_events": 2,
+      "status": "REPORTED"
+    },
+    {
+      "round": 5,
+      "date": "2026-07-14",
+      "result_events": 549,
+      "first_observed_rows": 292,
+      "repeat_events_in_same_row": 257,
+      "linked_repeat_events": 167,
+      "status": "REPORTED"
+    },
+    {
+      "round": 6,
+      "date": "2026-10-14",
+      "result_events": null,
+      "first_observed_rows": null,
+      "repeat_events_in_same_row": null,
+      "linked_repeat_events": null,
+      "status": "PENDING_NO_RESULT"
+    }
+  ],
+  "warning": "First observed row is NOT new unique patient; repeat test observations are NOT distinct follow-up people. Counts across rounds cannot be summed as unique persons. No raw identifying data published."
+}
