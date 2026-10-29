@@ -1,0 +1,67 @@
+name: Health GIS secure aggregate sync
+on:
+  schedule:
+    - cron: '20 1 * * *' # 08:20 Thailand time (UTC+7)
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/health_aggregate.mjs"
+      - "scripts/sync_health_registry.mjs"
+      - "tests/health_aggregate.test.mjs"
+      - ".github/workflows/health-registry-sync.yml"
+permissions:
+  contents: read
+concurrency:
+  group: health-data-sync
+  cancel-in-progress: false
+jobs:
+  health-sync:
+    runs-on: ubuntu-latest
+    env:
+      HAS_SHEET_CREDENTIAL: ${{ secrets.HEALTH_GOOGLE_SERVICE_ACCOUNT_JSON != '' }}
+      HAS_PUBLISH_TOKEN: ${{ secrets.HEALTH_PUBLISH_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.HEALTH_PUBLISH_TOKEN || github.token }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax check
+        run: |
+          node --check scripts/health_aggregate.mjs
+          node --check scripts/sync_health_registry.mjs
+          node --check scripts/health_identity_widget.js
+      - name: Privacy-focused aggregate tests
+        run: node --test tests/health_aggregate.test.mjs
+      - name: Verify existing public GIS
+        run: node scripts/verify_gis.mjs
+      - name: Check required private inputs
+        run: |
+          if [ "$HAS_SHEET_CREDENTIAL" != "true" ] || [ "$HAS_PUBLISH_TOKEN" != "true" ]; then
+            echo "SETUP_REQUIRED: both the Sheets read credential and a repo-scoped publish token are needed for unattended GitHub Pages updates."
+          fi
+      - name: Read restricted sheet and update public aggregates
+        if: ${{ env.HAS_SHEET_CREDENTIAL == 'true' && env.HAS_PUBLISH_TOKEN == 'true' }}
+        env:
+          HEALTH_GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.HEALTH_GOOGLE_SERVICE_ACCOUNT_JSON }}
+          HEALTH_SPREADSHEET_ID: 1KfuiM0BtxZpAkti0Qy5cWZtfeo7DUfUO0-VKkeXpQl4
+          HEALTH_TAB_ID: "1079757745"
+        run: node scripts/sync_health_registry.mjs
+      - name: Re-verify updated public outputs
+        if: ${{ env.HAS_SHEET_CREDENTIAL == 'true' && env.HAS_PUBLISH_TOKEN == 'true' }}
+        run: node scripts/verify_gis.mjs
+      - name: Commit ONLY published aggregates
+        if: ${{ env.HAS_SHEET_CREDENTIAL == 'true' && env.HAS_PUBLISH_TOKEN == 'true' }}
+        run: |
+          git config user.name 'theriver-health-sync[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/health_identity_summary_public.json data/health_population_timeline_public.json data/environment_timeline_v2.json data/gistda/health_district_timeline_public.geojson data/gistda/health_district_summary.geojson
+          if git diff --cached --quiet; then
+            echo "NO_AGGREGATE_CHANGES"
+            exit 0
+          fi
+          git commit -m "data(health): refreshed public aggregates"
+          git push origin HEAD:main
