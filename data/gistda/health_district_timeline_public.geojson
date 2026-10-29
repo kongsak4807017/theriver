@@ -1,1 +1,717 @@
-{"type":"FeatureCollection","name":"health_district_timeline_public","metadata":{"timezone":"Asia/Bangkok","epsg":"EPSG:4326","sampled_people_are_not_geolocated":true,"privacy":"No individual records or counts below 5","data_note":"District centroids for cartographic reference only. Not exact sample location.","total_features":25},"features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[99.831,19.9072]},"properties":{"record_id":"B68-01","layer":"health","cohort":"2025","district":"เมืองเชียงราย","start_date":"2025-07-22","end_date":"2025-07-24","location_precision":"district_centroid","screened":710,"urine_collected":130,"abnormal_label":"not published at district level","assay":"Total As screening (2025)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.9325,19.8833]},"properties":{"record_id":"B68-02","layer":"health","cohort":"2025","district":"เวียงชัย","start_date":"2025-07-22","end_date":"2025-07-24","location_precision":"district_centroid","screened":47,"urine_collected":7,"abnormal_label":"not published at district level","assay":"Total As screening (2025)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.9881,20.0469]},"properties":{"record_id":"B68-03","layer":"health","cohort":"2025","district":"เวียงเชียงรุ้ง","start_date":"2025-07-22","end_date":"2025-07-24","location_precision":"district_centroid","screened":236,"urine_collected":22,"abnormal_label":"not published at district level","assay":"Total As screening (2025)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.8525,20.1467]},"properties":{"record_id":"B68-04","layer":"health","cohort":"2025","district":"แม่จัน","start_date":"2025-07-22","end_date":"2025-07-24","location_precision":"district_centroid","screened":204,"urine_collected":29,"abnormal_label":"not published at district level","assay":"Total As screening (2025)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.0853,20.1458]},"properties":{"record_id":"B68-05","layer":"health","cohort":"2025","district":"ดอยหลวง","start_date":"2025-07-22","end_date":"2025-07-24","location_precision":"district_centroid","screened":238,"urine_collected":34,"abnormal_label":"not published at district level","assay":"Total As screening (2025)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.0869,20.275]},"properties":{"record_id":"B68-06","layer":"health","cohort":"2025","district":"เชียงแสน","start_date":"2025-07-22","end_date":"2025-07-24","location_precision":"district_centroid","screened":228,"urine_collected":48,"abnormal_label":"not published at district level","assay":"Total As screening (2025)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.8948,20.4351]},"properties":{"record_id":"B68-07","layer":"health","cohort":"2025","district":"แม่สาย","start_date":"2025-07-22","end_date":"2025-07-24","location_precision":"district_centroid","screened":393,"urine_collected":52,"abnormal_label":"not published at district level","assay":"Total As screening (2025)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.0869,20.275]},"properties":{"record_id":"HUM-DIST-01","layer":"health","cohort":"2026","district":"เชียงแสน","start_date":"2026-07-16","location_precision":"district_centroid","screened":1792,"urine_collected":113,"abnormal_label":"1–4","abnormal_count":null,"small_count_suppressed":true,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.8525,20.1467]},"properties":{"record_id":"HUM-DIST-02","layer":"health","cohort":"2026","district":"แม่จัน","start_date":"2026-07-16","location_precision":"district_centroid","screened":271,"urine_collected":36,"abnormal_label":"1–4","abnormal_count":null,"small_count_suppressed":true,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.9881,20.0469]},"properties":{"record_id":"HUM-DIST-03","layer":"health","cohort":"2026","district":"เวียงเชียงรุ้ง","start_date":"2026-07-16","location_precision":"district_centroid","screened":228,"urine_collected":51,"abnormal_label":"1–4","abnormal_count":null,"small_count_suppressed":true,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.0853,20.1458]},"properties":{"record_id":"HUM-DIST-04","layer":"health","cohort":"2026","district":"ดอยหลวง","start_date":"2026-07-16","location_precision":"district_centroid","screened":199,"urine_collected":34,"abnormal_label":"1–4","abnormal_count":null,"small_count_suppressed":true,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.831,19.9072]},"properties":{"record_id":"HUM-DIST-05","layer":"health","cohort":"2026","district":"เมืองเชียงราย","start_date":"2026-07-16","location_precision":"district_centroid","screened":36,"urine_collected":128,"abnormal_label":"1–4","abnormal_count":null,"small_count_suppressed":true,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.8948,20.4351]},"properties":{"record_id":"HUM-DIST-06","layer":"health","cohort":"2026","district":"แม่สาย","start_date":"2026-07-16","location_precision":"district_centroid","screened":15,"urine_collected":25,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.9325,19.8833]},"properties":{"record_id":"HUM-DIST-07","layer":"health","cohort":"2026","district":"เวียงชัย","start_date":"2026-07-16","location_precision":"district_centroid","screened":0,"urine_collected":2,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.1939,19.6853]},"properties":{"record_id":"HUM-DIST-08","layer":"health","cohort":"2026","district":"เทิง","start_date":"2026-07-16","location_precision":"district_centroid","screened":1288,"urine_collected":36,"abnormal_label":"1–4","abnormal_count":null,"small_count_suppressed":true,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.4047,20.2614]},"properties":{"record_id":"HUM-DIST-09","layer":"health","cohort":"2026","district":"เชียงของ","start_date":"2026-07-16","location_precision":"district_centroid","screened":1055,"urine_collected":46,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.5419,19.6558]},"properties":{"record_id":"HUM-DIST-10","layer":"health","cohort":"2026","district":"แม่สรวย","start_date":"2026-07-16","location_precision":"district_centroid","screened":305,"urine_collected":16,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.1536,19.8475]},"properties":{"record_id":"HUM-DIST-11","layer":"health","cohort":"2026","district":"พญาเม็งราย","start_date":"2026-07-16","location_precision":"district_centroid","screened":228,"urine_collected":2,"abnormal_label":"1–4","abnormal_count":null,"small_count_suppressed":true,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.5072,19.3486]},"properties":{"record_id":"HUM-DIST-12","layer":"health","cohort":"2026","district":"เวียงป่าเป้า","start_date":"2026-07-16","location_precision":"district_centroid","screened":224,"urine_collected":6,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.7408,19.5542]},"properties":{"record_id":"HUM-DIST-13","layer":"health","cohort":"2026","district":"พาน","start_date":"2026-07-16","location_precision":"district_centroid","screened":197,"urine_collected":1,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.7544,19.7892]},"properties":{"record_id":"HUM-DIST-14","layer":"health","cohort":"2026","district":"แม่ลาว","start_date":"2026-07-16","location_precision":"district_centroid","screened":169,"urine_collected":11,"abnormal_label":"1–4","abnormal_count":null,"small_count_suppressed":true,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.5136,20.1114]},"properties":{"record_id":"HUM-DIST-15","layer":"health","cohort":"2026","district":"เวียงแก่น","start_date":"2026-07-16","location_precision":"district_centroid","screened":164,"urine_collected":41,"abnormal_label":"9","abnormal_count":9,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.6583,20.2667]},"properties":{"record_id":"HUM-DIST-16","layer":"health","cohort":"2026","district":"แม่ฟ้าหลวง","start_date":"2026-07-16","location_precision":"district_centroid","screened":36,"urine_collected":0,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[100.2589,19.8519]},"properties":{"record_id":"HUM-DIST-17","layer":"health","cohort":"2026","district":"ขุนตาล","start_date":"2026-07-16","location_precision":"district_centroid","screened":32,"urine_collected":1,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[99.9928,19.5036]},"properties":{"record_id":"HUM-DIST-18","layer":"health","cohort":"2026","district":"ป่าแดด","start_date":"2026-07-16","location_precision":"district_centroid","screened":30,"urine_collected":0,"abnormal_label":"0","abnormal_count":null,"small_count_suppressed":false,"assay":"Urine arsenic (2026 surveillance)","status":"SURVEILLANCE_ONLY"}}]}
+{
+  "type": "FeatureCollection",
+  "name": "health_district_timeline_public",
+  "metadata": {
+    "timezone": "Asia/Bangkok",
+    "epsg": "EPSG:4326",
+    "sampled_people_are_not_geolocated": true,
+    "privacy": "No individual records or counts below 5",
+    "data_note": "District centroids for cartographic reference only. Not exact sample location.",
+    "total_features": 25,
+    "residence_assignment": "2026-10-28 revised registry; health urine sample counts grouped by patient's district of residence; geometry is district centroid.",
+    "screened_basis": "Historical service-area screening aggregates, not residence-based district denominators; do not calculate district urine testing rates.",
+    "snapshot_date": "2026-10-28"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.831,
+          19.9072
+        ]
+      },
+      "properties": {
+        "record_id": "B68-01",
+        "layer": "health",
+        "cohort": "2025",
+        "district": "เมืองเชียงราย",
+        "start_date": "2025-07-22",
+        "end_date": "2025-07-24",
+        "location_precision": "district_centroid",
+        "screened": 710,
+        "urine_collected": 135,
+        "abnormal_label": "not published at district level",
+        "assay": "Total As screening (2025)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons",
+        "abnormal_count": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.9325,
+          19.8833
+        ]
+      },
+      "properties": {
+        "record_id": "B68-02",
+        "layer": "health",
+        "cohort": "2025",
+        "district": "เวียงชัย",
+        "start_date": "2025-07-22",
+        "end_date": "2025-07-24",
+        "location_precision": "district_centroid",
+        "screened": 47,
+        "urine_collected": 5,
+        "abnormal_label": "not published at district level",
+        "assay": "Total As screening (2025)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons",
+        "abnormal_count": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.9881,
+          20.0469
+        ]
+      },
+      "properties": {
+        "record_id": "B68-03",
+        "layer": "health",
+        "cohort": "2025",
+        "district": "เวียงเชียงรุ้ง",
+        "start_date": "2025-07-22",
+        "end_date": "2025-07-24",
+        "location_precision": "district_centroid",
+        "screened": 236,
+        "urine_collected": 22,
+        "abnormal_label": "not published at district level",
+        "assay": "Total As screening (2025)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons",
+        "abnormal_count": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.8525,
+          20.1467
+        ]
+      },
+      "properties": {
+        "record_id": "B68-04",
+        "layer": "health",
+        "cohort": "2025",
+        "district": "แม่จัน",
+        "start_date": "2025-07-22",
+        "end_date": "2025-07-24",
+        "location_precision": "district_centroid",
+        "screened": 204,
+        "urine_collected": 29,
+        "abnormal_label": "not published at district level",
+        "assay": "Total As screening (2025)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons",
+        "abnormal_count": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.0853,
+          20.1458
+        ]
+      },
+      "properties": {
+        "record_id": "B68-05",
+        "layer": "health",
+        "cohort": "2025",
+        "district": "ดอยหลวง",
+        "start_date": "2025-07-22",
+        "end_date": "2025-07-24",
+        "location_precision": "district_centroid",
+        "screened": 238,
+        "urine_collected": 33,
+        "abnormal_label": "not published at district level",
+        "assay": "Total As screening (2025)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons",
+        "abnormal_count": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.0869,
+          20.275
+        ]
+      },
+      "properties": {
+        "record_id": "B68-06",
+        "layer": "health",
+        "cohort": "2025",
+        "district": "เชียงแสน",
+        "start_date": "2025-07-22",
+        "end_date": "2025-07-24",
+        "location_precision": "district_centroid",
+        "screened": 228,
+        "urine_collected": 48,
+        "abnormal_label": "not published at district level",
+        "assay": "Total As screening (2025)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons",
+        "abnormal_count": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.8948,
+          20.4351
+        ]
+      },
+      "properties": {
+        "record_id": "B68-07",
+        "layer": "health",
+        "cohort": "2025",
+        "district": "แม่สาย",
+        "start_date": "2025-07-22",
+        "end_date": "2025-07-24",
+        "location_precision": "district_centroid",
+        "screened": 393,
+        "urine_collected": 50,
+        "abnormal_label": "not published at district level",
+        "assay": "Total As screening (2025)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons",
+        "abnormal_count": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.0869,
+          20.275
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-01",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "เชียงแสน",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 1792,
+        "urine_collected": 113,
+        "abnormal_label": "1–4",
+        "abnormal_count": null,
+        "small_count_suppressed": true,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.8525,
+          20.1467
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-02",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "แม่จัน",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 271,
+        "urine_collected": 36,
+        "abnormal_label": "1–4",
+        "abnormal_count": null,
+        "small_count_suppressed": true,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.9881,
+          20.0469
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-03",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "เวียงเชียงรุ้ง",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 228,
+        "urine_collected": 51,
+        "abnormal_label": "1–4",
+        "abnormal_count": null,
+        "small_count_suppressed": true,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.0853,
+          20.1458
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-04",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "ดอยหลวง",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 199,
+        "urine_collected": 34,
+        "abnormal_label": "1–4",
+        "abnormal_count": null,
+        "small_count_suppressed": true,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.831,
+          19.9072
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-05",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "เมืองเชียงราย",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 36,
+        "urine_collected": 127,
+        "abnormal_label": "1–4",
+        "abnormal_count": null,
+        "small_count_suppressed": true,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.8948,
+          20.4351
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-06",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "แม่สาย",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 15,
+        "urine_collected": 25,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.9325,
+          19.8833
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-07",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "เวียงชัย",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 0,
+        "urine_collected": 3,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.1939,
+          19.6853
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-08",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "เทิง",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 1288,
+        "urine_collected": 36,
+        "abnormal_label": "1–4",
+        "abnormal_count": null,
+        "small_count_suppressed": true,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.4047,
+          20.2614
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-09",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "เชียงของ",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 1055,
+        "urine_collected": 46,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.5419,
+          19.6558
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-10",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "แม่สรวย",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 305,
+        "urine_collected": 16,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.1536,
+          19.8475
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-11",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "พญาเม็งราย",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 228,
+        "urine_collected": 2,
+        "abnormal_label": "1–4",
+        "abnormal_count": null,
+        "small_count_suppressed": true,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.5072,
+          19.3486
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-12",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "เวียงป่าเป้า",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 224,
+        "urine_collected": 6,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.7408,
+          19.5542
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-13",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "พาน",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 197,
+        "urine_collected": 1,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.7544,
+          19.7892
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-14",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "แม่ลาว",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 169,
+        "urine_collected": 11,
+        "abnormal_label": "1–4",
+        "abnormal_count": null,
+        "small_count_suppressed": true,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.5136,
+          20.1114
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-15",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "เวียงแก่น",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 164,
+        "urine_collected": 41,
+        "abnormal_label": "9",
+        "abnormal_count": 9,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.6583,
+          20.2667
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-16",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "แม่ฟ้าหลวง",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 36,
+        "urine_collected": 0,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.2589,
+          19.8519
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-17",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "ขุนตาล",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 32,
+        "urine_collected": 1,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.9928,
+          19.5036
+        ]
+      },
+      "properties": {
+        "record_id": "HUM-DIST-18",
+        "layer": "health",
+        "cohort": "2026",
+        "district": "ป่าแดด",
+        "start_date": "2026-07-16",
+        "location_precision": "district_centroid",
+        "screened": 30,
+        "urine_collected": 0,
+        "abnormal_label": "0",
+        "abnormal_count": null,
+        "small_count_suppressed": false,
+        "assay": "Urine arsenic (2026 surveillance)",
+        "status": "SURVEILLANCE_ONLY",
+        "location_basis": "district_of_residence",
+        "screened_basis": "service_area_not_residence",
+        "count_unit": "urine_result_rows_not_unique_persons"
+      }
+    }
+  ]
+}
