@@ -5,7 +5,7 @@
     "timezone": "Asia/Bangkok",
     "epsg": "EPSG:4326",
     "sampled_people_are_not_geolocated": true,
-    "privacy": "No individual records or counts below 5",
+    "privacy": "No individual identifiers, household coordinates, or case-level results. Only abnormal-result cells of 1–4 suppressed; testing counts are operational aggregates.",
     "data_note": "District centroids for cartographic reference only. Not exact sample location.",
     "total_features": 25,
     "residence_assignment": "2026-10-28 revised registry; health urine sample counts grouped by patient's district of residence; geometry is district centroid.",
