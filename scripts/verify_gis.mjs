@@ -79,6 +79,24 @@ assert.ok(html.includes("environment_timeline_v2.json")&&html.includes("sediment
 assert.ok(html.includes("health_population_timeline_public.json")&&html.includes("H.baseline_districts")&&html.includes("H.followup_phases"));
 assert.ok(html.includes('id="healthTimeline"'));
 
+// Health uses the residence district; laboratory rounds accumulate observations, NOT unique persons.
+assert.equal(health.registry_rounds.length,6);
+assert.deepEqual(health.registry_rounds.map(x=>x.urine_result_rows),[322,7,2,31,549,null]);
+assert.equal(health.registry_rounds[4].residence_districts_with_results,16);
+assert.equal(health.registry_audit.total_registry_rows,641);
+assert.equal(health.registry_audit.baseline_and_july_2026_result_in_same_row,236);
+assert.deepEqual(Object.fromEntries(health.baseline_districts.map(x=>[x.district,x.urine_collected])),{"เมืองเชียงราย":135,"เวียงชัย":5,"เวียงเชียงรุ้ง":22,"แม่จัน":29,"ดอยหลวง":33,"เชียงแสน":48,"แม่สาย":50});
+assert.equal(data.healthDistricts.find(x=>x.district==="เมืองเชียงราย").urineCollected,127);
+assert.equal(data.healthDistricts.find(x=>x.district==="เวียงชัย").urineCollected,3);
+assert.ok(data.healthDistricts.every(x=>x.location_basis==="residence_district"));
+assert.ok(healthGeo.features.every(f=>f.properties.location_basis==="district_of_residence"));
+assert.equal(healthGeo.features.filter(f=>f.properties.cohort==="2025").reduce((n,f)=>n+f.properties.urine_collected,0),322);
+assert.equal(healthGeo.features.filter(f=>f.properties.cohort==="2026").reduce((n,f)=>n+f.properties.urine_collected,0),549);
+assert.equal(load("data/gistda/health_district_summary.geojson").features.reduce((n,f)=>n+f.properties.urine_collected,0),549);
+assert.ok(html.includes("G.features")&&html.includes("H.registry_rounds")&&html.includes("รายกลางตามภูมิลำเนา")===false);
+assert.ok(!html.includes("กำลังทวนสอบว่าจะจัดตามภูมิลำเนา"));
+console.log("PASS residence districts, accumulated round records, no claim of unique cohort");
+
 const pcd=load("data/pcd_surface_water_23_rounds.json");
 const pcdGeo=load("data/gistda/pcd_surface_water_timeseries.geojson");
 assert.equal(pcd.schema,"theriver/pcd-surface-water-v1");
