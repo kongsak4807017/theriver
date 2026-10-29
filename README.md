@@ -1,3 +1,5 @@
+**Data quality note:** Health sampling-round records are not unique persons; counts of newly screened and follow-up people require verified identity linkage outside the public website.
+
 ## Health GIS deployment — 29 October 2026: residence-based timeline and expanding cohorts
 
 The health GIS now uses the **district of residence** (อำเภอตามภูมิลำเนา) for every urine-result pin, located at the **administrative district centroid**, never at a person's home or the collecting facility. Results come from the revised registry tab `แก้ไข28ตค69` dated 28 Oct 2026; no person-level information is published.
