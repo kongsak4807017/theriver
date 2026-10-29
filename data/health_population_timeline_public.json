@@ -23,7 +23,10 @@
     "assay_caution": "2025 Total As in µg/L and speciation in µg/g creatinine differ; 2026 inorganic As data are a different testing context and cannot be treated as a directly comparable trend",
     "baseline_2025": "2025 register count is authoritative for district mapping, while both slide totals reconcile",
     "followup_gaps": "2026 fifth-round 549-person results are reported in aggregate but not filled in 351-row registry; do not construct individual time-series",
-    "water_misclassification": "130.64 and 56.3 µg/L values cited for an index case are urinary measurements, not confirmed river concentrations"
+    "water_misclassification": "130.64 and 56.3 µg/L values cited for an index case are urinary measurements, not confirmed river concentrations",
+    "district_assignment": "All health GIS sample counts use district of residence from 28 Oct 2026 registry, not collecting-site districts. Pins are district centroids, not homes.",
+    "screening_denominator_warning": "Province-wide screened totals 2056 in 2025 and 6269 in 2026 derive from summaries; district screening distributions are by operational area and cannot be used as residence-based denominators or prevalence rates.",
+    "growing_cohorts_warning": "Each laboratory round adds observations and may include both newly reached people and previous participants. Counts across rounds are test-events, not unique persons; do not sum rounds to obtain a unique participant count or interpret as repeat-person trajectories."
   },
   "baseline_districts": [
     {
@@ -35,14 +38,16 @@
       "lon": 99.831,
       "location_precision": "district_centroid",
       "screened": 710,
-      "urine_collected": 130,
+      "urine_collected": 135,
       "slide_feb_2026": 132,
       "slide_oct_2026": 135,
       "assay": "Total As (urine)",
       "threshold_note": "Screening threshold >100 µg/L; district-level exceedance counts withheld",
-      "notes": "Registry and presentation counts differ by district assignment; use registry count for district mapping",
+      "notes": "2026-10-28 revised registry counts by residence; 2025 presentations are separate service-area allocations. Do not use screening total as district residence denominator.",
       "source_sheet": "6_ทวนสอบ_ทะเบียนคน_68_72",
-      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf"
+      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf",
+      "location_basis": "residence_district",
+      "screened_basis": "reported_screening_by_service_area_not_residence"
     },
     {
       "id": "B68-02",
@@ -53,14 +58,16 @@
       "lon": 99.9325,
       "location_precision": "district_centroid",
       "screened": 47,
-      "urine_collected": 7,
+      "urine_collected": 5,
       "slide_feb_2026": 5,
       "slide_oct_2026": 2,
       "assay": "Total As (urine)",
       "threshold_note": "Screening threshold >100 µg/L; district-level exceedance counts withheld",
-      "notes": "Registry and presentation counts differ by district assignment; use registry count for district mapping",
+      "notes": "2026-10-28 revised registry counts by residence; 2025 presentations are separate service-area allocations. Do not use screening total as district residence denominator.",
       "source_sheet": "6_ทวนสอบ_ทะเบียนคน_68_72",
-      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf"
+      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf",
+      "location_basis": "residence_district",
+      "screened_basis": "reported_screening_by_service_area_not_residence"
     },
     {
       "id": "B68-03",
@@ -76,9 +83,11 @@
       "slide_oct_2026": 22,
       "assay": "Total As (urine)",
       "threshold_note": "Screening threshold >100 µg/L; district-level exceedance counts withheld",
-      "notes": "Consistent across source registry and both summaries",
+      "notes": "2026-10-28 revised registry counts by residence; 2025 presentations are separate service-area allocations. Do not use screening total as district residence denominator.",
       "source_sheet": "6_ทวนสอบ_ทะเบียนคน_68_72",
-      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf"
+      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf",
+      "location_basis": "residence_district",
+      "screened_basis": "reported_screening_by_service_area_not_residence"
     },
     {
       "id": "B68-04",
@@ -94,9 +103,11 @@
       "slide_oct_2026": 29,
       "assay": "Total As (urine)",
       "threshold_note": "Screening threshold >100 µg/L; district-level exceedance counts withheld",
-      "notes": "Consistent across source registry and both summaries",
+      "notes": "2026-10-28 revised registry counts by residence; 2025 presentations are separate service-area allocations. Do not use screening total as district residence denominator.",
       "source_sheet": "6_ทวนสอบ_ทะเบียนคน_68_72",
-      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf"
+      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf",
+      "location_basis": "residence_district",
+      "screened_basis": "reported_screening_by_service_area_not_residence"
     },
     {
       "id": "B68-05",
@@ -107,14 +118,16 @@
       "lon": 100.0853,
       "location_precision": "district_centroid",
       "screened": 238,
-      "urine_collected": 34,
+      "urine_collected": 33,
       "slide_feb_2026": 34,
       "slide_oct_2026": 34,
       "assay": "Total As (urine)",
       "threshold_note": "Screening threshold >100 µg/L; district-level exceedance counts withheld",
-      "notes": "Consistent across source registry and both summaries",
+      "notes": "2026-10-28 revised registry counts by residence; 2025 presentations are separate service-area allocations. Do not use screening total as district residence denominator.",
       "source_sheet": "6_ทวนสอบ_ทะเบียนคน_68_72",
-      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf"
+      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf",
+      "location_basis": "residence_district",
+      "screened_basis": "reported_screening_by_service_area_not_residence"
     },
     {
       "id": "B68-06",
@@ -130,9 +143,11 @@
       "slide_oct_2026": 48,
       "assay": "Total As (urine)",
       "threshold_note": "Screening threshold >100 µg/L; district-level exceedance counts withheld",
-      "notes": "Consistent across source registry and both summaries",
+      "notes": "2026-10-28 revised registry counts by residence; 2025 presentations are separate service-area allocations. Do not use screening total as district residence denominator.",
       "source_sheet": "6_ทวนสอบ_ทะเบียนคน_68_72",
-      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf"
+      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf",
+      "location_basis": "residence_district",
+      "screened_basis": "reported_screening_by_service_area_not_residence"
     },
     {
       "id": "B68-07",
@@ -143,14 +158,16 @@
       "lon": 99.8948,
       "location_precision": "district_centroid",
       "screened": 393,
-      "urine_collected": 52,
+      "urine_collected": 50,
       "slide_feb_2026": 52,
       "slide_oct_2026": 52,
       "assay": "Total As (urine)",
       "threshold_note": "Screening threshold >100 µg/L; district-level exceedance counts withheld",
-      "notes": "Consistent across source registry and both summaries",
+      "notes": "2026-10-28 revised registry counts by residence; 2025 presentations are separate service-area allocations. Do not use screening total as district residence denominator.",
       "source_sheet": "6_ทวนสอบ_ทะเบียนคน_68_72",
-      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf"
+      "source_document": "24 กพ 69.pdf; 21 ตค 69 (1).pdf",
+      "location_basis": "residence_district",
+      "screened_basis": "reported_screening_by_service_area_not_residence"
     }
   ],
   "baseline_totals": {
@@ -273,17 +290,100 @@
       {
         "district": "เมืองเชียงราย",
         "existing_dashboard_urine_collected": 128,
-        "updated_registry_by_residence": 127
+        "updated_registry_by_residence": 127,
+        "approved_gis_urine_collected": 127
       },
       {
         "district": "เวียงชัย",
         "existing_dashboard_urine_collected": 2,
-        "updated_registry_by_residence": 3
+        "updated_registry_by_residence": 3,
+        "approved_gis_urine_collected": 3
       }
     ],
-    "district_basis_limitation": "Dashboard totals use the prior published district aggregate; the revised register uses a residence district. Provincial totals agree at 549; map district counts remain unchanged pending data-steward validation.",
+    "district_basis_limitation": "Approved 29 Oct 2026: residence district is the authoritative GIS map basis. 2025 district urine counts reclassified; 2026 Muang 127, Wiang Chai 3; province total still 549. Screened denominators are NOT residence-stratified.",
     "round_6_status": "14 Oct 2026 header present, no result values entered by 28 Oct 2026.",
     "clinical_limitation": "Total As, speciation and risk screening are different measurements; map is not an individual risk or causal exposure map.",
-    "privacy": "No personal identifiers, household coordinates, or person-level lab results are present."
-  }
+    "privacy": "No personal identifiers, household coordinates, or person-level lab results are present.",
+    "baseline_residence_districts": {
+      "เมืองเชียงราย": 135,
+      "เวียงชัย": 5,
+      "เวียงเชียงรุ้ง": 22,
+      "แม่จัน": 29,
+      "ดอยหลวง": 33,
+      "เชียงแสน": 48,
+      "แม่สาย": 50
+    },
+    "sampling_round_caution": "641 registry rows, 322 in first round and 549 in July round with 236 same-row overlaps; lack of verified unique identifiers prevents unique-person cumulative inference."
+  },
+  "registry_rounds": [
+    {
+      "id": "2025-07",
+      "round": 1,
+      "start": "2025-07-22",
+      "end": "2025-07-24",
+      "kind": "baseline",
+      "urine_result_rows": 322,
+      "residence_districts_with_results": 7,
+      "screened_province": 2056,
+      "source": "updated_registry_2026-10-28",
+      "status": "reported"
+    },
+    {
+      "id": "2025-10-09",
+      "round": 2,
+      "start": "2025-10-09",
+      "end": "2025-10-09",
+      "kind": "followup",
+      "urine_result_rows": 7,
+      "screened_province": null,
+      "source": "updated_registry_2026-10-28",
+      "status": "reported"
+    },
+    {
+      "id": "2025-10-29",
+      "round": 3,
+      "start": "2025-10-29",
+      "end": "2025-10-29",
+      "kind": "investigation",
+      "urine_result_rows": 2,
+      "screened_province": null,
+      "source": "updated_registry_2026-10-28",
+      "status": "reported"
+    },
+    {
+      "id": "2026-03-06",
+      "round": 4,
+      "start": "2026-03-06",
+      "end": "2026-03-06",
+      "kind": "followup_and_expansion",
+      "urine_result_rows": 31,
+      "screened_province": null,
+      "source": "updated_registry_2026-10-28",
+      "status": "reported"
+    },
+    {
+      "id": "2026-07",
+      "round": 5,
+      "start": "2026-07-14",
+      "end": "2026-07-16",
+      "kind": "surveillance_expansion",
+      "urine_result_rows": 549,
+      "residence_districts_with_results": 16,
+      "screened_districts_reported": 18,
+      "screened_province": 6269,
+      "source": "updated_registry_2026-10-28",
+      "status": "reported"
+    },
+    {
+      "id": "2026-10",
+      "round": 6,
+      "start": "2026-10-14",
+      "end": "2026-10-16",
+      "kind": "followup_pending",
+      "urine_result_rows": null,
+      "screened_province": null,
+      "source": "updated_registry_2026-10-28",
+      "status": "no_results_entered"
+    }
+  ]
 }
