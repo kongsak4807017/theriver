@@ -1,3 +1,18 @@
+## Health GIS deployment — 29 October 2026: residence-based timeline and expanding cohorts
+
+The health GIS now uses the **district of residence** (อำเภอตามภูมิลำเนา) for every urine-result pin, located at the **administrative district centroid**, never at a person's home or the collecting facility. Results come from the revised registry tab `แก้ไข28ตค69` dated 28 Oct 2026; no person-level information is published.
+
+- **2025 round 1** (22–24 July): **322 test-result rows / 7 residence districts**. Residence counts: เมืองเชียงราย 135, เวียงชัย 5, เวียงเชียงรุ้ง 22, แม่จัน 29, ดอยหลวง 33, เชียงแสน 48, แม่สาย 50.
+- **2025 follow-ups** (9 and 29 Oct): **7** and **2** test-result rows, respectively; **2026 Mar 6**: **31** test-result rows.
+- **2026 round 5** (14–16 July): **549 test-result rows / 16 districts with urine results**; separate population-screening report covers **6,269 persons in 18 districts**. Corrected residence counts are เมืองเชียงราย **127** (previous 128) and เวียงชัย **3** (previous 2).
+- **Round 6** (14 October 2026): columns exist but there are **no results entered** in the snapshot; **unknown, not zero tested**.
+- The revised registry contains **641 rows**, and **236 rows** contain both 2025 baseline and July 2026 result fields. Because identity linkage is incomplete, *rows are not independently verified unique persons*, nor are 322+7+2+31+549 distinct patients.
+- **Screened totals (2,056 in 2025 and 6,269 in 2026) remain provincial report figures**. Existing district screening splits reflect operational/service catchment areas and are NOT residence-based denominators; the public map therefore does not compute district positivity rates using those values.
+- The map derives district histories from `data/gistda/health_district_timeline_public.geojson` and the expanding round list from `data/health_population_timeline_public.json`, so subsequent confirmed rounds can be appended without discarding prior rounds. Updating a Google Sheet alone does *not* automatically publish to GitHub Pages; a reviewed, privacy-safe snapshot and deployment are required.
+- No name, HN, personal ID, exact household coordinate or case-level laboratory result is in public files. Exact small abnormal-result cells (1–4) remain suppressed. 2025 Total As and 2026 speciation are not directly comparable exposures.
+
+---
+
 # The River — GIS Timeline for Surface Water, Sediment, Food & Health
 
 ## Fish evidence update — 28 October 2026 (original PDF checked)
