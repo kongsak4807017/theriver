@@ -64,7 +64,7 @@ assert.equal(health.baseline_districts.reduce((s,r)=>s+r.slide_feb_2026,0),322);
 assert.equal(health.baseline_districts.reduce((s,r)=>s+r.slide_oct_2026,0),322);
 assert.equal(health.latest_totals.urine_collected,549);
 assert.equal(health.latest_totals.urine_over_reference,31);
-assert.equal(healthGeo.features.length,25);
+assert.ok(healthGeo.features.length>=25,'Additional health rounds may append district-centroid features');
 assert.equal(healthGeo.features.filter(f=>f.properties.cohort==="2025").length,7);
 assert.equal(healthGeo.features.filter(f=>f.properties.cohort==="2026").length,18);
 for(const feature of healthGeo.features){const [lon,lat]=feature.geometry.coordinates;assert.ok(lon>=96&&lon<=105&&lat>=15&&lat<=24);assert.match(feature.properties.start_date,/^\d{4}-\d{2}-\d{2}$/);if(feature.properties.cohort==="2026")assert.ok(feature.properties.abnormal_count===null||feature.properties.abnormal_count>=5);}
@@ -97,6 +97,15 @@ assert.ok(html.includes("G.features")&&html.includes("H.registry_rounds")&&html.
 assert.ok(!html.includes("กำลังทวนสอบว่าจะจัดตามภูมิลำเนา"));
 console.log("PASS residence districts, accumulated round records, no claim of unique cohort");
 
+const identityAggregate=load("data/health_identity_summary_public.json");
+assert.equal(identityAggregate.schema,"theriver/health-identity-aggregate-v1");
+assert.equal(identityAggregate.kpis.unique_persons.value,null,"Full unique-person total must not be guessed");
+assert.equal(identityAggregate.kpis.newly_screened.value,null,"Newly screened total must be verified");
+assert.equal(identityAggregate.kpis.followup_persons.value,null,"Followup person total must be verified");
+assert.doesNotMatch(JSON.stringify(identityAggregate),/\\b\\d{13}\\b|"patient_id"\\s*:|"citizen_id"\\s*:/i);
+assert.ok(html.includes('id="healthIdentitySummary"')&&html.includes("health_identity_widget.js"));
+for(const f of healthGeo.features){if(f.properties.cohort?.startsWith("round-")){assert.equal(f.properties.location_basis,"district_of_residence");assert.ok(f.properties.urine_collected===null||f.properties.urine_collected>=5);}}
+console.log("PASS health linkage coverage, no invented unique counts, expandable rounds and privacy");
 const pcd=load("data/pcd_surface_water_23_rounds.json");
 const pcdGeo=load("data/gistda/pcd_surface_water_timeseries.geojson");
 assert.equal(pcd.schema,"theriver/pcd-surface-water-v1");
