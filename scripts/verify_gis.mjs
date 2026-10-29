@@ -102,7 +102,7 @@ assert.equal(identityAggregate.schema,"theriver/health-identity-aggregate-v1");
 assert.equal(identityAggregate.kpis.unique_persons.value,null,"Full unique-person total must not be guessed");
 assert.equal(identityAggregate.kpis.newly_screened.value,null,"Newly screened total must be verified");
 assert.equal(identityAggregate.kpis.followup_persons.value,null,"Followup person total must be verified");
-assert.doesNotMatch(JSON.stringify(identityAggregate),/\\b\\d{13}\\b|"patient_id"\\s*:|"citizen_id"\\s*:/i);
+assert.doesNotMatch(JSON.stringify(identityAggregate),/[0-9]{13}|"(?:patient_id|citizen_id|hn)"\s*:/i);
 assert.ok(html.includes('id="healthIdentitySummary"')&&html.includes("health_identity_widget.js"));
 for(const f of healthGeo.features){if(f.properties.cohort?.startsWith("round-")){assert.equal(f.properties.location_basis,"district_of_residence");assert.ok(f.properties.urine_collected===null||f.properties.urine_collected>=5);}}
 console.log("PASS health linkage coverage, no invented unique counts, expandable rounds and privacy");
