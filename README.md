@@ -1,3 +1,18 @@
+## Health GIS deployment — 29 October 2026: residence-based timeline and expanding cohorts
+
+The health GIS now uses the **district of residence** (อำเภอตามภูมิลำเนา) for every urine-result pin, located at the **administrative district centroid**, never at a person's home or the collecting facility. Results come from the revised registry tab `แก้ไข28ตค69` dated 28 Oct 2026; no person-level information is published.
+
+- **2025 round 1** (22–24 July): **322 test-result rows / 7 residence districts**. Residence counts: เมืองเชียงราย 135, เวียงชัย 5, เวียงเชียงรุ้ง 22, แม่จัน 29, ดอยหลวง 33, เชียงแสน 48, แม่สาย 50.
+- **2025 follow-ups** (9 and 29 Oct): **7** and **2** test-result rows, respectively; **2026 Mar 6**: **31** test-result rows.
+- **2026 round 5** (14–16 July): **549 test-result rows / 16 districts with urine results**; separate population-screening report covers **6,269 persons in 18 districts**. Corrected residence counts are เมืองเชียงราย **127** (previous 128) and เวียงชัย **3** (previous 2).
+- **Round 6** (14 October 2026): columns exist but there are **no results entered** in the snapshot; **unknown, not zero tested**.
+- The revised registry contains **641 rows**, and **236 rows** contain both 2025 baseline and July 2026 result fields. Because identity linkage is incomplete, *rows are not independently verified unique persons*, nor are 322+7+2+31+549 distinct patients.
+- **Screened totals (2,056 in 2025 and 6,269 in 2026) remain provincial report figures**. Existing district screening splits reflect operational/service catchment areas and are NOT residence-based denominators; the public map therefore does not compute district positivity rates using those values.
+- The map derives district histories from `data/gistda/health_district_timeline_public.geojson` and the expanding round list from `data/health_population_timeline_public.json`, so subsequent confirmed rounds can be appended without discarding prior rounds. Updating a Google Sheet alone does *not* automatically publish to GitHub Pages; a reviewed, privacy-safe snapshot and deployment are required.
+- No name, HN, personal ID, exact household coordinate or case-level laboratory result is in public files. Exact small abnormal-result cells (1–4) remain suppressed. 2025 Total As and 2026 speciation are not directly comparable exposures.
+
+---
+
 # The River — GIS Timeline for Surface Water, Sediment, Food & Health
 
 ## Fish evidence update — 28 October 2026 (original PDF checked)
@@ -16,7 +31,7 @@ The website now has **one map layer** named **ปลาและสัตว์�
 
 - Original sample source 2025: [สรุปตรวจผักปลา 4 ครั้ง ปี68.xlsx](https://docs.google.com/spreadsheets/d/1mxZSktshxs6wd3RAZDijqZQBMdQ8oTLy/edit).
 - Original 2026 records: reports [01](https://drive.google.com/file/d/1XTzl8Ndwf_eEwG5xIiRtxNyBu8difKQs/view), [02](https://drive.google.com/file/d/1lfkLm1ffuhXsq5g7sB_jy9QB3beisguP/view), [03](https://drive.google.com/file/d/1txScDYlheKx0dFmZ-0p7hrF__OJm1gna/view), [04](https://drive.google.com/file/d/18flb2JitDO1IABbZWPHe2x85m_14c32i/view), [05](https://drive.google.com/file/d/1ViITfUPA0_qyksOx-YYiAdaxZRjosoLE/view), [06](https://drive.google.com/file/d/1MPfxH4HL_SSpNDcFtUOt0kkk8i0NR24e/view), [07](https://drive.google.com/file/d/18OLP91HZHuLf1nRZa4Zl6OccIII8FWvH/view), [08](https://drive.google.com/file/d/1iEzSxnML-qwPmDc8GU9DR9XMHrzj8427/view), [09](https://drive.google.com/file/d/10zob-rNtaz3vKMtw3BMPfm76NBTa7t80/view), [10](https://drive.google.com/file/d/14nGBPSA_ZV8DEDSIQ6wxKEtR5xpIfw5w/view).
-- [Dataprepsriver](https://docs.google.com/spreadsheets/d/1v6tisYHTERwmt6f56IezlLAK5-tqtlTbWYpV3ln6bIg/edit), tabs 2 and 3, is a derived dataset, not an original laboratory report.
+- `Dataprepsriver` (แหล่งข้อมูลภายใน; ไม่เผยแพร่ลิงก์ทะเบียนรายบุคคล), tabs 2 and 3, is a derived dataset, not an original laboratory report.
 - **206 individual fish results are machine-readable:** FY2568 has 63 and FY2569 has 143. Fifteen originally collapsed results have been recovered from the original PDF.
 - For **128 fish records assigned CR codes in the processed Google Sheet**, the stored lat/lon match the corresponding CR reference station **exactly**. These are **borrowed station reference coordinates**, not verified capture GPS. Source-document verification is incomplete: FY2569 round 2 PDF describes at least its first two fish locations verbally without printing a CR code, although the derived sheet assigns CR1 and CR3.
 - The **63 FY2568 observations** and **one FY2569 summary** use regional centroid approximations; **36** uncoded approximate rows coincide numerically with CR reference coordinates. This is **not** evidence of sampling at the CR station.
@@ -71,7 +86,7 @@ The report states data *as of 15 Oct 2026, 08:30*. The final appendix C coordina
 
 ## Health Surveillance Timeline — ฉบับทวนสอบ 26 ตุลาคม 2569
 
-เพิ่มข้อมูล **สรุปการตรวจสารหนูในปัสสาวะประชาชน** จากแท็บ `6_ทวนสอบ_ทะเบียนคน_68_72` ใน Google Sheet [Dataprepsriver](https://docs.google.com/spreadsheets/d/1v6tisYHTERwmt6f56IezlLAK5-tqtlTbWYpV3ln6bIg/edit) โดยเก็บเฉพาะข้อมูลระดับอำเภอที่เผยแพร่ได้
+เพิ่มข้อมูล **สรุปการตรวจสารหนูในปัสสาวะประชาชน** จากแท็บ `6_ทวนสอบ_ทะเบียนคน_68_72` ใน Google Sheet `Dataprepsriver` (แหล่งข้อมูลภายใน; ไม่เผยแพร่ลิงก์ทะเบียนรายบุคคล) โดยเก็บเฉพาะข้อมูลระดับอำเภอที่เผยแพร่ได้
 
 - `data/health_population_timeline_public.json` — ผลทวนสอบยอด 7 อำเภอและกิจกรรมตรวจสุขภาพ/ติดตาม 2568–2569 รวม 7 ระยะ โดยไม่แสดงผลรายบุคคล
 - `data/gistda/health_district_timeline_public.geojson` — GeoJSON ใช้งาน GIS ได้ 25 ระเบียนระดับอำเภอ (7 อำเภอ ปี 2568; 18 อำเภอ ปี 2569) โดยใช้พิกัด **ศูนย์กลางอำเภอ** ไม่ใช่บ้านผู้รับการตรวจ
@@ -114,9 +129,20 @@ The report states data *as of 15 Oct 2026, 08:30*. The final appendix C coordina
 - การแก้ไขไฟล์บน `main` จะทำให้ GitHub Pages สร้างเว็บไซต์จาก branch นี้โดยอัตโนมัติ
 - หากหน้าเว็บไม่อัปเดต ให้ตรวจสอบสถานะที่ [Actions](https://github.com/kongsak4807017/theriver/actions)
 
+### ทวนสอบทะเบียนสุขภาพฉบับแก้ไข 28 ตุลาคม 2569
+
+แหล่งใหม่: ทะเบียนตรวจคัดกรองสุขภาพประชาชน(สารหนู) ปี 2568–2572 แท็บ `แก้ไข28ตค69` (ทะเบียนภายในที่มีข้อมูลสุขภาพรายบุคคล; **ไม่เผยแพร่ URL หรือแถวข้อมูลดิบ**)
+
+- พบ **641 แถวทะเบียน** เทียบกับชีตเดิม 351 แถว โดยมีค่าผล Total As รอบแรก 322 แถว และรอบกรกฎาคม 2569 จำนวน 549 แถว ซึ่งตรงกับยอดรวมเดิม
+- มี **236 แถวที่กรอกผลทั้งรอบแรกและรอบกรกฎาคม 2569** แต่ยัง **ไม่รับรองว่าเป็นคนเดิม 236 คน** เนื่องจากไม่มีเลขประจำตัวประชาชน 372 แถวและพบกลุ่มชื่อ–อายุ–เพศที่อาจซ้ำกัน 6 กลุ่ม ต้องตรวจด้วยระบบปิด
+- รอบกรกฎาคม 2569 มีค่า Speciation กรอก 31 แถว; จำนวนแถวที่กรอกผลไม่ใช่การยืนยันค่าเกินเกณฑ์โดยอัตโนมัติ ต้องยึดผลสรุปทางห้องปฏิบัติการ
+- รอบ 6 วันที่ **14 ต.ค. 2569** มีหัวคอลัมน์ แต่ยัง **ไม่กรอกผลตรวจ** ณ snapshot 28 ต.ค. 2569
+- ยอดเดือนกรกฎาคม 2569 รวม **549** ตรงกัน แต่ระดับอำเภอต่างกัน 1 ราย: เมืองเชียงราย **128 (แผนที่เดิม) / 127 (ทะเบียนตามภูมิลำเนา)** และเวียงชัย **2 / 3** จึงยังไม่แก้ตัวเลขหมุดจนกว่าจะยืนยันมิติทางภูมิศาสตร์ที่ใช้
+- บันทึกเฉพาะข้อมูลรวมและผลตรวจสอบโครงสร้างใน `data/health_population_timeline_public.json` ชุดปรับปรุงนี้ไม่นำชื่อ เลขบัตรประชาชน HN ที่อยู่ หรือผลตรวจรายคนออกสู่ GitHub Pages
+
 ## Environmental & Health GIS v2 (Google Sheet Dataprepsriver)
 
-แหล่งข้อมูลเพิ่มเติม: [Dataprepsriver](https://docs.google.com/spreadsheets/d/1v6tisYHTERwmt6f56IezlLAK5-tqtlTbWYpV3ln6bIg/edit) ในโฟลเดอร์ Google Drive `theriver`. ชุดข้อมูลเผยแพร่เป็น **ข้อมูลสาธารณะที่คัดกรองแล้ว**; แท็บ `6_ทวนสอบ_ทะเบียนคน_68_72` ใช้ตรวจสอบเท่านั้น **ไม่ส่งข้อมูลรายกรณีขึ้น GitHub** และไม่ดึงทะเบียนบุคคลเต็มเข้าระบบสาธารณะ
+แหล่งข้อมูลเพิ่มเติม: `Dataprepsriver` (แหล่งข้อมูลภายใน; ไม่เผยแพร่ลิงก์ทะเบียนรายบุคคล) ในโฟลเดอร์ Google Drive `theriver`. ชุดข้อมูลเผยแพร่เป็น **ข้อมูลสาธารณะที่คัดกรองแล้ว**; แท็บ `6_ทวนสอบ_ทะเบียนคน_68_72` ใช้ตรวจสอบเท่านั้น **ไม่ส่งข้อมูลรายกรณีขึ้น GitHub** และไม่ดึงทะเบียนบุคคลเต็มเข้าระบบสาธารณะ
 
 - `index.html` — เว็บรวมทุกโดเมนพร้อม Timeline, toggle layers, สัญลักษณ์เฉพาะน้ำประปา/ปลา/ผัก/ข้าว/คน, switching OpenStreetMap / Esri Satellite, รายละเอียดสถานีและกราฟประวัติ
 - `gis_timeline_sediment_2025_2026.html` — เว็บตะกอนดินฉบับก่อนยังใช้งานได้เหมือนเดิม
