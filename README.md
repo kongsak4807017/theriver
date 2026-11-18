@@ -1,3 +1,11 @@
+## District names and improved river-network overlays — 18 November 2026
+
+The River now displays all 18 Chiang Rai amphoe names with labels located INSIDE the corresponding polygons (computed by pole-of-inaccessibility / polylabel from the GeoThai / OCHA COD-AB district boundaries). Download [district-name label points](./data/gistda/chiang_rai_18_district_label_points.geojson). District labels turn off together with district boundary lines and do not intercept map pin clicks.
+
+Earlier, the blue river overlay filtered GIS data by exact river names and excluded unnamed mid-channel segments, making the displayed river discontinuous. The replacement queries ALL features with waterway=river (named and unnamed) with pagination instead of an ArcGIS 2,000-feature cutoff. The blue stroke is 6.2px with a white-blue 12px underlay. At zoom 11 or closer, the app also loads waterway=stream geometries for the visible map extent. The map displays warnings if the third-party feed is unavailable or truncated.
+
+River geometry is supplied live by [Esri OSM Asia Waterways FeatureServer](https://services-ap1.arcgis.com/iA7fZQOnjY9D67Zx/arcgis/rest/services/OSM_AS_Waterways/FeatureServer/0), data © OpenStreetMap contributors (ODbL). Availability and coverage depend on the OSM mapping and external GIS service: not an authoritative hydrographic survey. No station-to-station straight lines are fabricated.
+
 **Data quality note:** Health sampling-round records are not unique persons; counts of newly screened and follow-up people require verified identity linkage outside the public website.
 
 ## Health GIS deployment — 29 October 2026: residence-based timeline and expanding cohorts
