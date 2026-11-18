@@ -150,7 +150,7 @@ export function aggregateVillagePublic(columns, rounds, snapshot) {
     districts: Object.fromEntries(Object.entries(districtsOut).sort((a,b)=>a[0].localeCompare(b[0],'th')))
   };
   const serialized = JSON.stringify(output);
-  if (/(?:\"(?:name|citizen_id|cid|hn|patient_id|identity_hash|lat|lon|coordinates)\"\s*:|\b\d{13}\b)/iu.test(serialized))
+  if (/(?:"(?:name|citizen_id|cid|hn|patient_id|identity_hash|lat|lon|coordinates)"\s*:|\b\d{13}\b)/iu.test(serialized))
     throw new Error('Sensitive or precise location data in village output');
   return output;
 }
