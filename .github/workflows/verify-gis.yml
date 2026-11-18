@@ -19,4 +19,4 @@ jobs:
         with:
           node-version: 22
       - name: Verify GIS datasets, privacy and browser script
-        run: node scripts/verify_gis.mjs
+        run: node scripts/verify_gis.mjs && node scripts/verify_health_village.mjs && node --test tests/health_village_aggregate.test.mjs
