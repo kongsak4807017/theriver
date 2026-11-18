@@ -163,6 +163,29 @@ assert.ok(html.includes('getPane(name).style.pointerEvents="none"'),"Overlay mus
 assert.ok(html.includes("GeoThai / OCHA COD-AB"),"Administrative boundary attribution");
 assert.ok(html.includes("OpenStreetMap contributors / ODbL"),"Waterway source attribution");
 console.log("PASS Chiang Rai 1 province, 18 districts, toggles, provenance and non-interactive blue river highlight");
+
+const districtLabels=load("data/gistda/chiang_rai_18_district_label_points.geojson");
+assert.equal(districtLabels.type,"FeatureCollection");
+assert.equal(districtLabels.features.length,18);
+assert.equal(new Set(districtLabels.features.map(x=>x.properties.district_code)).size,18);
+const byDistrictCode=new Map(districtBoundaries.features.map(f=>[f.properties.code,f]));
+function insideRing(point,ring){let within=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>point[1])!==(b[1]>point[1])&&point[0]<(b[0]-a[0])*(point[1]-a[1])/(b[1]-a[1])+a[0])within=!within;}return within;}
+function insideDistrict(point,polygon){return insideRing(point,polygon[0])&&!polygon.slice(1).some(ring=>insideRing(point,ring));}
+for(const label of districtLabels.features){
+ const district=byDistrictCode.get(label.properties.district_code);
+ assert.ok(district,"Missing district for interior label "+label.properties.district_code);
+ assert.equal(label.properties.district_name_th,district.properties.name_th);
+ const polygons=district.geometry.type==="Polygon"?[district.geometry.coordinates]:district.geometry.coordinates;
+ assert.ok(polygons.some(poly=>insideDistrict(label.geometry.coordinates,poly)),"Label outside district: "+label.properties.district_name_th);
+}
+assert.ok(html.includes("district-name-pin")&&html.includes("district-names"),"District names should be rendered in non-interactive text pane");
+assert.ok(html.includes("referenceLayers.districtLabels"),"District text follows district layer visibility");
+assert.ok(html.includes("waterway = '"+'"'+"+kind+"+'"'+"'),"River query must not filter by named river only");
+assert.ok(!html.includes("name LIKE"),"Incomplete name-matched OSM river fragments must not be used");
+assert.ok(html.includes("resultOffset")&&html.includes("resultRecordCount"),"River data requires pagination rather than 2000 record truncation");
+assert.ok(html.includes('queryWaterways("stream"'),"Streams should supplement rivers at close zoom");
+assert.ok(html.includes('weight:kind==="river"?6.2:2.9'),"Blue river stroke must be thicker and high contrast");
+console.log("PASS 18 district labels strictly inside polygons, river query without name filter, paginated data and blue line styling");
 const code=html.match(/<script>\n([\s\S]*?)\n<\/script>/);
 assert.ok(code,"Client script must be present");
 new Function(code[1]);
