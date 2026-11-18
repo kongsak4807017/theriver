@@ -3,9 +3,10 @@
 import {createSign} from 'node:crypto';
 import {readFileSync,writeFileSync,existsSync} from 'node:fs';
 import {aggregate,detectRounds,colName,validateNew} from './health_aggregate.mjs';
+import {aggregateVillagePublic} from './health_village_aggregate.mjs';
 const ID=process.env.HEALTH_SPREADSHEET_ID||'1KfuiM0BtxZpAkti0Qy5cWZtfeo7DUfUO0-VKkeXpQl4';
 const TAB=Number(process.env.HEALTH_TAB_ID||'1079757745');
-const P={q:'data/health_identity_summary_public.json',h:'data/health_population_timeline_public.json',e:'data/environment_timeline_v2.json',g:'data/gistda/health_district_timeline_public.geojson',s:'data/gistda/health_district_summary.geojson'};
+const P={q:'data/health_identity_summary_public.json',v:'data/health_village_public.json',h:'data/health_population_timeline_public.json',e:'data/environment_timeline_v2.json',g:'data/gistda/health_district_timeline_public.geojson',s:'data/gistda/health_district_summary.geojson'};
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
 const b64=x=>Buffer.from(typeof x==='string'?x:JSON.stringify(x)).toString('base64url');
 async function googleToken(){
@@ -33,7 +34,8 @@ async function fetchRegistry(token){
  const h=await google('/values/'+encodeURIComponent(prefix+'!A2:'+end+'3')+'?valueRenderOption=FORMATTED_VALUE',token);
  const rounds=detectRounds(h.values?.[0]||[],h.values?.[1]||[]).sort((a,b)=>a.round-b.round);
  if(!rounds.every((r,i)=>r.round===i+1))throw Error('Round numbering changed');
- const columns=['F','N',...rounds.map(r=>r.column)];
+ // L=หมู่, M=ตำบล, N=อำเภอ, plus Total As columns for all monitoring rounds.
+ const columns=['F','L','M','N',...rounds.map(r=>r.column)];
  const qs=new URLSearchParams({valueRenderOption:'FORMATTED_VALUE'});
  for(const c of columns)qs.append('ranges',prefix+'!'+c+'4:'+c+tab.gridProperties.rowCount);
  const result=await google('/values:batchGet?'+qs.toString(),token);
@@ -95,7 +97,22 @@ async function main(){
    delete a.generated;delete b.generated;delete a.source_snapshot;delete b.source_snapshot;
    if(JSON.stringify(a)===JSON.stringify(b)){result.output.generated=previous.generated;result.output.source_snapshot=previous.source_snapshot;}
  }
- const outputs=[[P.q,result.output],...updateGis(result)];
+ const village=aggregateVillagePublic(source.values,source.rounds,result.output.source_snapshot);
+ for(const r of result.output.rounds){
+   const v=village.province_rounds.find(x=>x.round===r.round);
+   if((v?.result_events||0)!==(r.result_events||0))
+     throw Error('Village/province reconciliation failed for round '+r.round);
+ }
+ // A previous published village count must not silently disappear on a broken source update.
+ if(existsSync(P.v)){
+   const old=read(P.v);
+   for(const r of old.province_rounds||[]){
+     const now=village.province_rounds.find(x=>x.round===r.round);
+     if(r.result_events>0 && (!now || now.result_events<r.result_events*.9))
+       throw Error('Village public timeline unexpectedly lost observations in round '+r.round);
+   }
+ }
+ const outputs=[[P.q,result.output],[P.v,village],...updateGis(result)];
  const changed=outputs.filter(([path,value])=>!existsSync(path)||JSON.stringify(read(path))!==JSON.stringify(value));
  for(const [path,value] of changed)writeFileSync(path,JSON.stringify(value,null,2)+'\n','utf8');
  console.log('HEALTH_SYNC_OK: '+result.output.registry_rows+' registry rows / '+result.output.rounds.length+' rounds / '+changed.length+' public aggregate files');

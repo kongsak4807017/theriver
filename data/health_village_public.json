@@ -1,0 +1,566 @@
+{
+  "schema": "theriver/health-village-public-v1",
+  "source_snapshot": "2026-11-18",
+  "source": "Restricted health registry: 2569 tab, residence village/subdistrict/district",
+  "count_unit": "urine_result_events_not_verified_unique_persons",
+  "location_basis": "residence_village_number_without_verified_gps",
+  "map_location_precision": "district_centroid_only_until_village_coordinates_validated",
+  "reference": {
+    "analyte": "Urine Total As",
+    "operator": ">",
+    "threshold": 100,
+    "unit": "µg/L",
+    "label": "สูงกว่าเกณฑ์คัดกรอง >100 µg/L (ไม่ใช่การวินิจฉัยโรค)",
+    "source": "DDC arsenic surveillance screening / existing The River 2025-2026 reporting"
+  },
+  "privacy": {
+    "minimum_village_result_events_per_round": 10,
+    "minimum_published_abnormal_and_complementary_cells": 5,
+    "counts_zero_to_four_are_not_distinguished_from_suppressed_small_cells": true,
+    "exact_case_values": false,
+    "household_coordinates": false,
+    "individual_data": false
+  },
+  "limitations": [
+    "กรณีจำนวนตัวอย่างหมู่บ้านต่ำกว่า 10 จะไม่เผยแพร่รายการหมู่บ้านและผลตรวจรายรอบ",
+    "ผลเกินเกณฑ์ 0–4 รายการและกลุ่มย่อยที่เสี่ยงต่อการอนุมานข้อมูลบุคคลจะไม่แสดงตัวเลขแน่นอน",
+    "Total As >100 µg/L เป็นเกณฑ์คัดกรองเท่านั้น; ไม่ใช่การยืนยันพิษสารหนูหรือผลตรวจแยกชนิด",
+    "ช่อง speciation ในทะเบียนมีบางผลที่เป็นคนละหน่วยและชนิดการตรวจไม่ยืนยัน จึงไม่จัดระดับ speciation บนแผนที่",
+    "จำนวนผลตรวจรายรอบไม่เท่ากับจำนวนบุคคลไม่ซ้ำ และไม่ใช่อัตราความชุกของประชาชน",
+    "ไม่มีพิกัดหมู่บ้านที่ผ่านการยืนยันในทะเบียน จึงแสดงข้อมูลหมู่บ้านในหมุดศูนย์กลางอำเภอเท่านั้น"
+  ],
+  "province_rounds": [
+    {
+      "round": 1,
+      "date": "2025-07-22",
+      "result_events": 322,
+      "above_reference": 7,
+      "without_village": 104,
+      "boundary_values": 0
+    },
+    {
+      "round": 2,
+      "date": "2025-10-09",
+      "result_events": 7,
+      "above_reference": 1,
+      "without_village": 3,
+      "boundary_values": 0
+    },
+    {
+      "round": 3,
+      "date": "2025-10-29",
+      "result_events": 2,
+      "above_reference": 2,
+      "without_village": 0,
+      "boundary_values": 0
+    },
+    {
+      "round": 4,
+      "date": "2026-03-06",
+      "result_events": 31,
+      "above_reference": 1,
+      "without_village": 0,
+      "boundary_values": 0
+    },
+    {
+      "round": 5,
+      "date": "2026-07-14",
+      "result_events": 549,
+      "above_reference": 31,
+      "without_village": 37,
+      "boundary_values": 0
+    },
+    {
+      "round": 6,
+      "date": "2026-10-14",
+      "result_events": 0,
+      "above_reference": 0,
+      "without_village": 0,
+      "boundary_values": 0
+    }
+  ],
+  "districts": {
+    "เชียงของ": [
+      {
+        "subdistrict": "ครึ่ง",
+        "village_no": "1",
+        "label": "หมู่ 1 ต.ครึ่ง",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 36,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      }
+    ],
+    "เชียงแสน": [
+      {
+        "subdistrict": "แม่เงิน",
+        "village_no": "5",
+        "label": "หมู่ 5 ต.แม่เงิน",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 20,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "โยนก",
+        "village_no": "9",
+        "label": "หมู่ 9 ต.โยนก",
+        "rounds": [
+          {
+            "round": 1,
+            "date": "2025-07-22",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 12,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          },
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 12,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "เวียง",
+        "village_no": "2",
+        "label": "หมู่ 2 ต.เวียง",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 10,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "เวียง",
+        "village_no": "4",
+        "label": "หมู่ 4 ต.เวียง",
+        "rounds": [
+          {
+            "round": 1,
+            "date": "2025-07-22",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 12,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          },
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 14,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "เวียง",
+        "village_no": "5",
+        "label": "หมู่ 5 ต.เวียง",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 18,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      }
+    ],
+    "เทิง": [
+      {
+        "subdistrict": "สันทรายงาม",
+        "village_no": "5",
+        "label": "หมู่ 5 ต.สันทรายงาม",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 17,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      }
+    ],
+    "เมืองเชียงราย": [
+      {
+        "subdistrict": "แม่ยาว",
+        "village_no": "2",
+        "label": "หมู่ 2 ต.แม่ยาว",
+        "rounds": [
+          {
+            "round": 1,
+            "date": "2025-07-22",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 13,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          },
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 17,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "ริมกก",
+        "village_no": "1",
+        "label": "หมู่ 1 ต.ริมกก",
+        "rounds": [
+          {
+            "round": 1,
+            "date": "2025-07-22",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 14,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          },
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 14,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "ริมกก",
+        "village_no": "2",
+        "label": "หมู่ 2 ต.ริมกก",
+        "rounds": [
+          {
+            "round": 1,
+            "date": "2025-07-22",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 23,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          },
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 23,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "ริมกก",
+        "village_no": "3",
+        "label": "หมู่ 3 ต.ริมกก",
+        "rounds": [
+          {
+            "round": 1,
+            "date": "2025-07-22",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 10,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          },
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 10,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "ริมกก",
+        "village_no": "7",
+        "label": "หมู่ 7 ต.ริมกก",
+        "rounds": [
+          {
+            "round": 1,
+            "date": "2025-07-22",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 14,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          },
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 14,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      }
+    ],
+    "แม่จัน": [
+      {
+        "subdistrict": "ท่าข้าวเปลือก",
+        "village_no": "11",
+        "label": "หมู่ 11 ต.ท่าข้าวเปลือก",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 13,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      }
+    ],
+    "เวียงแก่น": [
+      {
+        "subdistrict": "ม่วงยาย",
+        "village_no": "4",
+        "label": "หมู่ 4 ต.ม่วงยาย",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 22,
+            "over_reference_count": 6,
+            "over_reference_label": "6",
+            "over_reference_bands": [
+              ">100–150 µg/L",
+              ">150–200 µg/L",
+              ">200–300 µg/L"
+            ],
+            "disclosure_status": "PUBLISHED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "หล่ายงาว",
+        "village_no": "6",
+        "label": "หมู่ 6 ต.หล่ายงาว",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 12,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      }
+    ],
+    "เวียงเชียงรุ้ง": [
+      {
+        "subdistrict": "ดงมหาวัน",
+        "village_no": "6",
+        "label": "หมู่ 6 ต.ดงมหาวัน",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 13,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "ดงมหาวัน",
+        "village_no": "7",
+        "label": "หมู่ 7 ต.ดงมหาวัน",
+        "rounds": [
+          {
+            "round": 4,
+            "date": "2026-03-06",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 13,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          },
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 14,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      },
+      {
+        "subdistrict": "ดงมหาวัน",
+        "village_no": "8",
+        "label": "หมู่ 8 ต.ดงมหาวัน",
+        "rounds": [
+          {
+            "round": 5,
+            "date": "2026-07-14",
+            "assay": "Urine Total As",
+            "unit": "µg/L",
+            "result_events": 16,
+            "over_reference_count": null,
+            "over_reference_label": "ปกปิด (0–4 หรือกลุ่มย่อยไม่เพียงพอ)",
+            "over_reference_bands": [],
+            "disclosure_status": "SMALL_CELL_SUPPRESSED",
+            "reference_operator": ">",
+            "reference_value": 100
+          }
+        ]
+      }
+    ]
+  }
+}

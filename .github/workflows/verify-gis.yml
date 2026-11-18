@@ -7,6 +7,13 @@ on:
       - "data/**"
       - "scripts/**"
       - ".github/workflows/verify-gis.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "data/**"
+      - "scripts/**"
+      - "tests/health_village_aggregate.test.mjs"
+      - ".github/workflows/verify-gis.yml"
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,4 +26,4 @@ jobs:
         with:
           node-version: 22
       - name: Verify GIS datasets, privacy and browser script
-        run: node scripts/verify_gis.mjs
+        run: node scripts/verify_gis.mjs && node scripts/verify_health_village.mjs && node --test tests/health_village_aggregate.test.mjs

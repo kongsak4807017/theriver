@@ -14,10 +14,11 @@
     "updated_registry_note": "Person-level clinical source is restricted; no raw-sheet public link."
   },
   "privacy": {
-    "aggregation": "District only; never render household/village or case locations",
-    "small_cell": "Suppress exact district-level abnormal results of 1 to 4 persons",
+    "aggregation": "District-centroid health pins with village-level, disclosure-controlled aggregates nested in each pin; no village GPS or household/case coordinates.",
+    "small_cell": "Village summaries require >=10 result events per round. Exact abnormal counts require >=5 abnormalities and >=5 complementary results. Counts 0–4 are not distinguished on public pages.",
     "no_person_ids": true,
-    "no_case_level_values": true
+    "no_case_level_values": true,
+    "village_public_summary": "data/health_village_public.json"
   },
   "methodology": {
     "assay_caution": "2025 Total As in µg/L and speciation in µg/g creatinine differ; 2026 inorganic As data are a different testing context and cannot be treated as a directly comparable trend",
@@ -26,7 +27,8 @@
     "water_misclassification": "130.64 and 56.3 µg/L values cited for an index case are urinary measurements, not confirmed river concentrations",
     "district_assignment": "All health GIS sample counts use district of residence from 28 Oct 2026 registry, not collecting-site districts. Pins are district centroids, not homes.",
     "screening_denominator_warning": "Province-wide screened totals 2056 in 2025 and 6269 in 2026 derive from summaries; district screening distributions are by operational area and cannot be used as residence-based denominators or prevalence rates.",
-    "growing_cohorts_warning": "Each laboratory round adds observations and may include both newly reached people and previous participants. Counts across rounds are test-events, not unique persons; do not sum rounds to obtain a unique participant count or interpret as repeat-person trajectories."
+    "growing_cohorts_warning": "Each laboratory round adds observations and may include both newly reached people and previous participants. Counts across rounds are test-events, not unique persons; do not sum rounds to obtain a unique participant count or interpret as repeat-person trajectories.",
+    "village_disclosure": "Village location is based on the registry residence village number plus subdistrict and district; no validated village coordinates exist. Public village summaries are nested in district-centroid health pins. Total As >100 µg/L is screening, not confirmed arsenic toxicity."
   },
   "baseline_districts": [
     {
