@@ -7,6 +7,13 @@ on:
       - "data/**"
       - "scripts/**"
       - ".github/workflows/verify-gis.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "data/**"
+      - "scripts/**"
+      - "tests/health_village_aggregate.test.mjs"
+      - ".github/workflows/verify-gis.yml"
   workflow_dispatch:
 permissions:
   contents: read
