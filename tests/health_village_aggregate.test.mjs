@@ -48,7 +48,7 @@ test('publishes only village groups with >=10 results and 5+ abnormal/complement
   assert.equal(out.districts.เชียงแสน.some(x=>x.village_no==='3'),false);
   assert.equal(out.province_rounds.find(x=>x.round===6).result_events,0);
   assert.equal(out.privacy.minimum_village_result_events_per_round,VILLAGE_MIN_EVENTS);
-  assert.doesNotMatch(JSON.stringify(out),/citizen_id|patient_id|"name"\s*:|coordinates|เลขประจำตัว/u);
+  assert.doesNotMatch(JSON.stringify(out),/"(?:citizen_id|patient_id|name|coordinates)"\s*:|\b\d{13}\b/u);
 });
 test('never publishes small earlier round merely because later round qualified',()=>{
   const c=sampleRows([{n:14,village:'5',above:0,old:3}]);
