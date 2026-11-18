@@ -41,6 +41,11 @@ main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:
 @media(max-width:840px){header{padding:8px 12px;height:65px}.brand b{font-size:17px}.brand small{font-size:9px}.righthead .pill{display:none}.app{height:calc(100dvh - 65px);grid-template-columns:1fr;display:flex;flex-direction:column}aside{height:35%;min-height:195px;order:2;padding:12px;overflow:auto;border-right:0;border-top:1px solid var(--border)}main{height:65%;min-height:270px;order:1}#map{bottom:80px}.bottom{height:80px;padding:8px 13px}.legend{right:8px;bottom:91px;font-size:9px;padding:6px}.maptop{top:8px;right:8px}.mapbtn{padding:7px}.tracks{margin:7px 6px 3px}.layer{display:inline-flex!important;vertical-align:top;width:49%;margin:0!important}.layer small{display:none}.counter{display:none}h3{margin-top:12px}.panel{margin:7px 0}#details{margin-bottom:10px}}
 .health-round-list{display:grid;gap:6px;margin:9px 0}.health-round{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:#f8fcfd;font-size:11px}.health-round strong{color:#086b80}.health-round.pending{background:#fff9ed;border-color:#f1ddb8}.health-round.current{border-color:#b0dfd4;background:#effcf8}.health-metrics{border-top:1px solid var(--border);margin-top:10px;padding-top:9px}.health-metrics .small{line-height:1.65}
 #healthIdentitySummary table{border-collapse:collapse;width:100%;font-size:11px;margin-top:10px}#healthIdentitySummary td,#healthIdentitySummary th{border-bottom:1px solid #deeaed;padding:6px 4px;text-align:right}#healthIdentitySummary td:first-child,#healthIdentitySummary th:first-child{text-align:left}#healthIdentitySummary .notice{margin-top:0}
+.district-name-pin{border:none;background:transparent!important;box-shadow:none!important;pointer-events:none!important}
+.district-label{display:inline-block;white-space:nowrap;text-align:center;transform:translate(-50%,-50%);font-family:"Noto Sans Thai",system-ui,sans-serif;font-size:12px;line-height:1.2;font-weight:800;letter-spacing:.1px;color:#253059;text-shadow:-2px -2px 2px #fff,2px -2px 2px #fff,-2px 2px 2px #fff,2px 2px 2px #fff,0 0 7px #fff;opacity:.98;filter:drop-shadow(0 1px 2px #fff)}
+.district-label:hover{color:#1b3768}
+@media(max-width:840px){.district-label{font-size:11px}}
+
 .reference-grid{display:grid;gap:6px;margin:9px 0 8px}
 .reference-switch{display:flex;gap:9px;align-items:center;padding:8px 10px;border-radius:10px;border:1px solid #dae7e9;background:#f6fafb;font-size:12px;cursor:pointer}
 .reference-switch input{width:16px;height:16px;accent-color:#137c91}
@@ -252,6 +257,14 @@ function setReferenceVisibility(name){
   if(!el||!referenceLayers[name])return;
   if(el.checked){if(!map.hasLayer(referenceLayers[name]))map.addLayer(referenceLayers[name]);}
   else if(map.hasLayer(referenceLayers[name]))map.removeLayer(referenceLayers[name]);
+  if(name==="rivers"&&referenceLayers.streams){
+    if(el.checked){if(map.getZoom()>=11&&!map.hasLayer(referenceLayers.streams))map.addLayer(referenceLayers.streams);}
+    else if(map.hasLayer(referenceLayers.streams))map.removeLayer(referenceLayers.streams);
+  }
+  if(name==="districts"&&referenceLayers.districtLabels){
+    if(el.checked){if(!map.hasLayer(referenceLayers.districtLabels))map.addLayer(referenceLayers.districtLabels);}
+    else if(map.hasLayer(referenceLayers.districtLabels))map.removeLayer(referenceLayers.districtLabels);
+  }
 }
 function insertBoundaryLayer(name,geojson,style,paneName){
   const group=L.geoJSON(geojson,{pane:paneName,style,interactive:false});
@@ -268,6 +281,25 @@ async function loadAdministrativeBoundaries(){
   if(p.features.length!==1||d.features.length!==18)throw Error("boundary feature count must be 1 province + 18 districts");
   for(const f of d.features){if(f.properties.province_code!=="57")throw Error("District does not belong to Chiang Rai");}
   insertBoundaryLayer("districts",d,{color:"#7054a0",weight:1.4,dashArray:"6 5",opacity:.9,fill:false,lineCap:"round"},"district-outline");
+
+  const resp=await fetch("data/gistda/chiang_rai_18_district_label_points.geojson",{cache:"force-cache"});
+  if(!resp.ok)throw Error("district label HTTP "+resp.status);
+  const labels=await resp.json();
+  if(labels.features.length!==18)throw Error("18 district labels required");
+  const labelLayer=L.layerGroup();
+  const provinceCodeSet=new Set(d.features.map(x=>x.properties.code));
+  for(const x of labels.features){
+    const name=x.properties.district_name_th;
+    if(!provinceCodeSet.has(x.properties.district_code))throw Error("district label code mismatch");
+    // These points were calculated by polylabel from the real administrative polygon, not GPS stations.
+    const lat=x.geometry.coordinates[1],lon=x.geometry.coordinates[0];
+    const icon=L.divIcon({className:"district-name-pin",html:'<span class="district-label">อ.'+xesc(name)+'</span>',iconSize:[0,0],iconAnchor:[0,0]});
+    L.marker([lat,lon],{icon,pane:"district-names",interactive:false,keyboard:false}).addTo(labelLayer);
+  }
+  referenceLayers.districtLabels=labelLayer;
+  setReferenceVisibility("districts");
+  window.__theriverDistrictLabels=labels.features.map(x=>({code:x.properties.district_code,name:x.properties.district_name_th,position:x.geometry.coordinates}));
+
   const provinceLayer=insertBoundaryLayer("province",p,{color:"#0092a8",weight:3.5,opacity:1,fill:false,lineJoin:"round"},"province-outline");
   provinceBounds=provinceLayer.getBounds();
   map.attributionControl.addAttribution("Boundaries: GeoThai / OCHA COD-AB (CC BY 3.0 IGO)");
@@ -275,36 +307,78 @@ async function loadAdministrativeBoundaries(){
   return d.features.length;
 }
 // River centerlines come from OSM feature geometries; do not construct fake rivers from station coordinates.
+// Load all river segments, including unnamed parts: filtering names caused broken blue lines.
+const riverEndpoint="https://services-ap1.arcgis.com/iA7fZQOnjY9D67Zx/arcgis/rest/services/OSM_AS_Waterways/FeatureServer/0/query";
+const riverExtent="99.1,18.85,100.85,20.65";
+let activeRiverRequest=0,riverLoadTimeout=null,lastStreamKey="";
+async function queryWaterways(kind,extent,maxPages=15){
+  const collected=[],seen=new Set();
+  const pageSize=1000;
+  for(let page=0;page<maxPages;page++){
+    const params=new URLSearchParams({
+      where:"waterway = '"+kind+"'",geometry:extent,geometryType:"esriGeometryEnvelope",
+      inSR:"4326",outSR:"4326",spatialRel:"esriSpatialRelIntersects",
+      outFields:"objectid,osm_id2,name,waterway",returnGeometry:"true",
+      resultOffset:String(page*pageSize),resultRecordCount:String(pageSize),
+      orderByFields:"objectid ASC",geometryPrecision:"5",f:"geojson"
+    });
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),22000);
+    let data;
+    try{
+      const res=await fetch(riverEndpoint+"?"+params.toString(),{signal:controller.signal,mode:"cors"});
+      if(!res.ok)throw Error(kind+" HTTP "+res.status);
+      data=await res.json();
+    }finally{clearTimeout(timer);}
+    if(data.error)throw Error(kind+" "+(data.error.message||"server query error"));
+    const items=(data.features||[]).filter(f=>f.geometry&&["LineString","MultiLineString"].includes(f.geometry.type));
+    for(const feature of items){
+      const id=feature.id||feature.properties?.objectid||feature.properties?.osm_id2||String(page)+":"+String(collected.length);
+      if(!seen.has(id)){seen.add(id);collected.push(feature);}
+    }
+    if(items.length<pageSize&&!data.exceededTransferLimit)return {features:collected,truncated:false};
+    if(items.length===0)return {features:collected,truncated:false};
+  }
+  return {features:collected,truncated:true};
+}
+function decorateWaterways(features,kind){
+  return L.layerGroup([
+    L.geoJSON({type:"FeatureCollection",features},{pane:"river-underlay",style:{color:kind==="river"?"#eef8ff":"#d3ecff",weight:kind==="river"?12:6,opacity:.97,lineCap:"round",lineJoin:"round"},interactive:false}),
+    L.geoJSON({type:"FeatureCollection",features},{pane:"river-highlight",style:{color:kind==="river"?"#005be4":"#188cfc",weight:kind==="river"?6.2:2.9,opacity:.99,lineCap:"round",lineJoin:"round"},interactive:false})
+  ]);
+}
 async function loadRiverHighlight(){
-  const base="https://services-ap1.arcgis.com/iA7fZQOnjY9D67Zx/arcgis/rest/services/OSM_AS_Waterways/FeatureServer/0/query";
-  const labelTerms=["กก","รวก","แม่น้ำสาย","โขง","Mekong","ฝาง","ลาว","กรณ์","อิง","แม่จัน","Kok","Sai River","Ruak"];
-  const sql="waterway = 'river' AND ("+labelTerms.map(x=>"name LIKE '%"+x+"%'").join(" OR ")+")";
-  const params=new URLSearchParams({
-    where:sql,geometry:"99.1,18.85,100.85,20.65",
-    geometryType:"esriGeometryEnvelope",inSR:"4326",outSR:"4326",
-    spatialRel:"esriSpatialRelIntersects",
-    outFields:"name,name_en,waterway",returnGeometry:"true",
-    resultRecordCount:"2000",maxAllowableOffset:"0.0006",f:"geojson"
-  });
-  const ctrl=new AbortController();
-  const timer=setTimeout(()=>ctrl.abort(),18000);
-  try{
-    const res=await fetch(base+"?"+params.toString(),{signal:ctrl.signal,mode:"cors"});
-    if(!res.ok)throw Error("river HTTP "+res.status);
-    const data=await res.json();
-    if(data.error)throw Error(data.error.message||"OSM river service error");
-    const valid=(data.features||[]).filter(x=>x.geometry&&["LineString","MultiLineString"].includes(x.geometry.type));
-    if(!valid.length)throw Error("No named river features were returned");
-    const blue={color:"#086bdf",weight:4.4,opacity:.96,lineCap:"round",lineJoin:"round"};
-    const halo={color:"#d9efff",weight:8.5,opacity:.72,lineCap:"round",lineJoin:"round"};
-    const haloLayer=L.geoJSON({type:"FeatureCollection",features:valid},{pane:"river-underlay",style:halo,interactive:false});
-    const mainLayer=L.geoJSON({type:"FeatureCollection",features:valid},{pane:"river-highlight",style:blue,interactive:false});
-    referenceLayers.rivers=L.layerGroup([haloLayer,mainLayer]);
-    setReferenceVisibility("rivers");
-    map.attributionControl.addAttribution("River lines: © OpenStreetMap contributors / ODbL");
-    window.__theriverRivers={featureCount:valid.length,source:"OSM_AS_Waterways"};
-    return valid.length;
-  }finally{clearTimeout(timer);}
+  const result=await queryWaterways("river",riverExtent,18);
+  if(!result.features.length)throw Error("OSM river layer returned no features");
+  referenceLayers.rivers=decorateWaterways(result.features,"river");
+  setReferenceVisibility("rivers");
+  map.attributionControl.addAttribution("River lines: © OpenStreetMap contributors / ODbL");
+  window.__theriverRivers={featureCount:result.features.length,source:"OSM_AS_Waterways",unnamedSegmentsIncluded:true,truncated:result.truncated};
+  map.on("moveend zoomend",scheduleStreamOverlay);
+  scheduleStreamOverlay();
+  return {count:result.features.length,truncated:result.truncated};
+}
+function scheduleStreamOverlay(){
+  clearTimeout(riverLoadTimeout);
+  if(map.getZoom()<11){
+    if(referenceLayers.streams&&map.hasLayer(referenceLayers.streams))map.removeLayer(referenceLayers.streams);
+    return;
+  }
+  riverLoadTimeout=setTimeout(()=>loadStreamOverlay().catch(err=>referenceStatus("แม่น้ำหลักพร้อมแสดงแล้ว แต่ลำน้ำย่อยยังโหลดไม่ครบ: "+String(err),true)),650);
+}
+async function loadStreamOverlay(){
+  if(map.getZoom()<11||!referenceLayers.rivers)return;
+  const bounds=map.getBounds().pad(.1);
+  const key=[bounds.getWest().toFixed(2),bounds.getSouth().toFixed(2),bounds.getEast().toFixed(2),bounds.getNorth().toFixed(2)].join(",");
+  if(key===lastStreamKey){if(referenceLayers.streams)setReferenceVisibility("rivers");return;}
+  const requestId=++activeRiverRequest;
+  const result=await queryWaterways("stream",key,8);
+  if(requestId!==activeRiverRequest)return;
+  if(referenceLayers.streams){map.removeLayer(referenceLayers.streams);}
+  lastStreamKey=key;
+  referenceLayers.streams=decorateWaterways(result.features,"stream");
+  // streams follow the same toggle as rivers
+  if(document.querySelector('[data-reference-layer="rivers"]').checked)referenceLayers.streams.addTo(map);
+  referenceStatus("แนวแม่น้ำหลัก "+window.__theriverRivers.featureCount+" ช่วง · ลำน้ำย่อย "+result.features.length+" ช่วง"+(result.truncated?" (กำลังแสดงได้บางส่วน)":""));
 }
 function registerReferenceToggles(){
   document.querySelectorAll("[data-reference-layer]").forEach(el=>el.addEventListener("change",()=>setReferenceVisibility(el.dataset.referenceLayer)));
@@ -316,7 +390,7 @@ map=L.map("map",{zoomControl:false,preferCanvas:true}).setView([20.02,99.99],9);
 const osm=L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"});
 const satellite=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Imagery © Esri, Maxar, Earthstar Geographics"});
 osm.addTo(map);window.__theriverMap=map;
-for(const [name,z] of [["district-outline",405],["province-outline",415],["river-underlay",423],["river-highlight",425]]){map.createPane(name);map.getPane(name).style.zIndex=String(z);map.getPane(name).style.pointerEvents="none";}
+for(const [name,z] of [["district-outline",405],["province-outline",415],["river-underlay",423],["river-highlight",425],["district-names",450]]){map.createPane(name);map.getPane(name).style.zIndex=String(z);map.getPane(name).style.pointerEvents="none";}
 registerReferenceToggles();
 
 keyLayers.forEach(k=>{layerGroups[k]=L.layerGroup().addTo(map)});
@@ -334,7 +408,7 @@ let districtCount=0;
 try{districtCount=await loadAdministrativeBoundaries();}
 catch(err){referenceStatus("กรอบจังหวัด/อำเภอยังโหลดไม่สำเร็จ: "+String(err),true);}
 $("loading").classList.add("hidden");render();setTimeout(()=>map.invalidateSize(),500);
-loadRiverHighlight().then(n=>referenceStatus("ขอบเขต "+districtCount+" อำเภอ · แนวแม่น้ำสีน้ำเงิน "+n+" ช่วง"))
+loadRiverHighlight().then(n=>referenceStatus("มีชื่ออำเภอครบ "+districtCount+" แห่ง · เส้นแม่น้ำสีน้ำเงิน "+n.count+" ช่วง"+(n.truncated?" (บางช่วงยังโหลดไม่ครบ)":"")) )
 .catch(err=>referenceStatus("ขอบเขต "+districtCount+" อำเภอพร้อมใช้ · แนวแม่น้ำจาก OSM โหลดไม่ได้ (แผนที่พื้นฐานยังแสดงทางน้ำ): "+String(err),true));
 }init().catch(showError);
 })();
