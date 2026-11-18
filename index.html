@@ -360,6 +360,7 @@ async function loadRiverHighlight(){
 function scheduleStreamOverlay(){
   clearTimeout(riverLoadTimeout);
   if(map.getZoom()<11){
+    ++activeRiverRequest;lastStreamKey="";
     if(referenceLayers.streams&&map.hasLayer(referenceLayers.streams))map.removeLayer(referenceLayers.streams);
     return;
   }
@@ -372,7 +373,7 @@ async function loadStreamOverlay(){
   if(key===lastStreamKey){if(referenceLayers.streams)setReferenceVisibility("rivers");return;}
   const requestId=++activeRiverRequest;
   const result=await queryWaterways("stream",key,8);
-  if(requestId!==activeRiverRequest)return;
+  if(requestId!==activeRiverRequest||map.getZoom()<11)return;
   if(referenceLayers.streams){map.removeLayer(referenceLayers.streams);}
   lastStreamKey=key;
   referenceLayers.streams=decorateWaterways(result.features,"stream");
@@ -408,7 +409,7 @@ let districtCount=0;
 try{districtCount=await loadAdministrativeBoundaries();}
 catch(err){referenceStatus("กรอบจังหวัด/อำเภอยังโหลดไม่สำเร็จ: "+String(err),true);}
 $("loading").classList.add("hidden");render();setTimeout(()=>map.invalidateSize(),500);
-loadRiverHighlight().then(n=>referenceStatus("มีชื่ออำเภอครบ "+districtCount+" แห่ง · เส้นแม่น้ำสีน้ำเงิน "+n.count+" ช่วง"+(n.truncated?" (บางช่วงยังโหลดไม่ครบ)":"")) )
+loadRiverHighlight().then(n=>referenceStatus("ชื่ออำเภอครบ "+districtCount+" แห่ง · แม่น้ำ "+n.count+" ช่วง"+(n.truncated?" (ข้อมูลบริการจำกัด ต้องตรวจเพิ่ม)":"")+(map.getZoom()>=11?" · กำลังเติมลำน้ำย่อย":"")))
 .catch(err=>referenceStatus("ขอบเขต "+districtCount+" อำเภอพร้อมใช้ · แนวแม่น้ำจาก OSM โหลดไม่ได้ (แผนที่พื้นฐานยังแสดงทางน้ำ): "+String(err),true));
 }init().catch(showError);
 })();
