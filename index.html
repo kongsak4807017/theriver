@@ -22,6 +22,13 @@ select,input[type=date]{border:1px solid #d5e3e6;background:#fff;border-radius:9
 .field{display:flex;flex-direction:column;gap:5px;flex:1}.field span{font-size:11px;color:var(--muted)}
 #details{font-size:12px;line-height:1.8}#details p{margin:6px 0}.kv{display:grid;grid-template-columns:90px 1fr;gap:4px 12px;padding:7px 0}.kv>span:nth-child(odd){color:var(--muted)}.spark{max-width:100%;width:100%;display:block;margin-top:8px;background:#fff;border-radius:10px;border:1px solid var(--border)}
 main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:0 0 111px}.leaflet-container{font:inherit}.leaflet-control-attribution{font-size:9px!important}.leaflet-popup-content{line-height:1.55;min-width:210px;font-size:12px}.leaflet-popup-content b{font-size:14px}
+.village-result-block{margin:10px 0;padding:10px;border:1px solid #cee1e6;background:#f5fafb;border-radius:10px}
+.village-result-block b{font-size:12px}.village-result-scroll{max-height:265px;overflow:auto;margin-top:8px;border-radius:7px;border:1px solid #dae8ea}
+.village-results{width:100%;border-collapse:collapse;font-size:10px;text-align:left}
+.village-results th,.village-results td{padding:7px 5px;border-bottom:1px solid #dce8eb;vertical-align:top;white-space:normal}
+.village-results th{position:sticky;top:0;background:#e4f2f4;z-index:1}
+.village-results .restricted{color:#7e611f}.village-results .above{color:#b02e40;font-weight:800}
+.leaflet-popup-content{max-width:450px!important}
 .lab-attrib{margin:8px 0 5px;padding:8px 9px;background:#f0f8f9;border:1px solid #cfe5e8;border-left:3px solid #168394;border-radius:8px;line-height:1.55;overflow-wrap:anywhere}
 .lab-attrib strong{display:block;color:#195568;font-size:11px!important}
 .lab-attrib .agency-value{font-weight:650;color:#133944;font-size:12px}
@@ -78,7 +85,7 @@ main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:
     <label class="layer"><input type="checkbox" data-layer="fish" checked><span class="symbol">🐟</span><span class="type"><b>ปลาและสัตว์น้ำ</b><small>206 ผลตรวจ · 6 ตัวอย่างไม่มีพิกัดยืนยัน</small></span><span class="counter" id="n-fish">0</span></label>
     <label class="layer"><input type="checkbox" data-layer="vegetable" checked><span class="symbol">🥬</span><span class="type"><b>พืชผักและผลไม้</b><small>รวมพิกัด UTM ที่แปลงแล้ว</small></span><span class="counter" id="n-vegetable">0</span></label>
     <label class="layer"><input type="checkbox" data-layer="rice" checked><span class="symbol">🌾</span><span class="type"><b>ข้าวสารและข้าวเปลือก</b><small>Total As / Inorganic As</small></span><span class="counter" id="n-rice">0</span></label>
-    <label class="layer"><input type="checkbox" data-layer="health" checked><span class="symbol">👥</span><span class="type"><b>สุขภาพประชาชน</b><small>หมุดตามภูมิลำเนา · เก็บประวัติหลายรอบ</small></span><span class="counter" id="n-health">0</span></label>
+    <label class="layer"><input type="checkbox" data-layer="health" checked><span class="symbol">👥</span><span class="type"><b>สุขภาพประชาชน</b><small>กดหมุดเพื่อดูผลปัสสาวะรายหมู่บ้าน (ปกปิดข้อมูลรายคน)</small></span><span class="counter" id="n-health">0</span></label>
   </div>
 
   <h3>ขอบเขตจังหวัด อำเภอ และแนวแม่น้ำ</h3>
@@ -114,7 +121,7 @@ main{position:relative;min-width:0;overflow:hidden}#map{position:absolute;inset:
 (function(){
 "use strict";
 const $=id=>document.getElementById(id),xesc=x=>String(x===null||x===undefined?"—":x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let E,S,H,W,G,map,layerGroups={},referenceLayers={},provinceBounds=null,currentDate="",times=[],idx=0,playTimer=null,baseMode=0,detailSelection=null;
+let E,S,H,W,G,V,map,layerGroups={},referenceLayers={},provinceBounds=null,currentDate="",times=[],idx=0,playTimer=null,baseMode=0,detailSelection=null;
 const keyLayers=["sediment","surface_water","tap_water","fish","vegetable","rice","health"];
 const colors={severe:"#d34b54",warn:"#e89b3c",good:"#269b7f",unknown:"#8ca2ab"};
 const thaiDate=d=>{if(!d)return "ไม่มีวันที่";const a=d.split("-");return Number(a[2])+" "+["","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."][Number(a[1])]+" "+(Number(a[0])+543)};
@@ -164,7 +171,32 @@ function attributionMarkup(kind,record,showBasis){
  (v.note?'<div class="agency-note">'+xesc(v.note)+'</div>':'')+
  (showBasis&&v.basis?'<div class="agency-note">ที่มา: '+xesc(v.basis)+'</div>':'')+'</div>';
 }
-function popupHtml(kind,title,summary,date,s){return '<b>'+xesc(title)+'</b><br><span class="tag">'+xesc(kind)+'</span> <span class="small">'+xesc(thaiDate(date))+'</span><p>'+xesc(summary)+'</p><span class="small">'+(isApprox(s)?"⚠ ตำแหน่งโดยประมาณ ไม่ใช่พิกัดจุดเก็บจริง":"พิกัดตามชุดข้อมูล")+'</span>'+attributionMarkup(kind,s,false)}
+// Village data is already disclosure-controlled at aggregation time; this view never reads person records.
+function villagePublicMarkup(district, atDate){
+  if(!V) return '<div class="notice">ข้อมูลสรุประดับหมู่บ้านยังโหลดไม่สำเร็จ (แผนที่อำเภอเดิมยังใช้ได้)</div>';
+  const group=V.districts?.[district]||[];
+  const rows=[];
+  for(const v of group) for(const r of v.rounds||[]){
+    if(r.date<=atDate)rows.push({v,r});
+  }
+  if(!rows.length)return '<div class="notice">ยังไม่มีหมู่บ้านที่มีจำนวนผลตรวจเพียงพอสำหรับเผยแพร่ในช่วงเวลาที่เลือก (ไม่ใช่ศูนย์คนตรวจ)</div>';
+  rows.sort((a,b)=>b.r.date.localeCompare(a.r.date)||a.v.subdistrict.localeCompare(b.v.subdistrict,'th')||Number(a.v.village_no)-Number(b.v.village_no));
+  const body=rows.map(({v,r})=>
+    '<tr><td>'+xesc(v.label)+'</td><td>ครั้งที่ '+xesc(r.round)+'<br>'+xesc(thaiDate(r.date))+'</td>'+
+    '<td><b>'+fmt(r.result_events)+'</b></td>'+
+    '<td class="'+(r.over_reference_count===null?'restricted':'above')+'">'+xesc(r.over_reference_label)+'</td>'+
+    '<td>'+xesc(r.over_reference_bands?.join(' ถึง ')||'—')+'</td></tr>'
+  ).join('');
+  return '<div class="village-result-block"><b>🧪 ผลสารหนูในปัสสาวะระดับหมู่บ้าน · เฉพาะข้อมูลที่เปิดเผยได้</b>'+
+    '<div class="small">Total As · เกณฑ์คัดกรอง >100 µg/L (ไม่ใช่การยืนยันโรค)</div>'+
+    '<div class="village-result-scroll"><table class="village-results"><thead><tr><th>หมู่บ้าน</th><th>รอบ</th><th>ผลตรวจ</th><th>เกินเกณฑ์</th><th>ช่วงผลสูง</th></tr></thead><tbody>'+body+'</tbody></table></div>'+
+    '<p class="small">นับผลตรวจตามรอบ ไม่ใช่คนไม่ซ้ำ · แสดงเฉพาะหมู่บ้านที่มีผลตรวจ ≥10 รายการในรอบนั้น · ปกปิดกลุ่มย่อย 0–4 หรือเมื่ออนุมานตัวบุคคลได้ · ไม่แสดงค่ารายคน · ตำแหน่งหมุดเป็นจุดกลางอำเภอ ไม่ใช่หมู่บ้าน</p></div>';
+}
+function popupHtml(kind,title,summary,date,s){
+  return '<b>'+xesc(title)+'</b><br><span class="tag">'+xesc(kind)+'</span> <span class="small">'+xesc(thaiDate(date))+'</span><p>'+xesc(summary)+'</p>'+
+    '<span class="small">'+(isApprox(s)?"⚠ ตำแหน่งโดยประมาณ ไม่ใช่พิกัดจุดเก็บจริง":"พิกัดตามชุดข้อมูล")+'</span>'+
+    (kind==='health'&&s.district?villagePublicMarkup(s.district,currentDate):'')+attributionMarkup(kind,s,false);
+}
 function add(kind,s,label,summary,date,sel,status){if(!coordAllowed(s))return false;const marker=L.marker([s.lat,s.lon],{icon:icon(kind,sev(status),isApprox(s))});marker.bindTooltip(label);marker.bindPopup(popupHtml(kind,label,summary,date,s));marker.on("click",()=>selectDetail(sel));layerGroups[kind].addLayer(marker);return true}
 function makeChart(readings,field,label,unit){const valid=readings.map((p,i)=>({date:p.date||p.start,value:cleanNum(p[field]),i})).filter(x=>x.value!==null);if(!valid.length)return '<p class="small">ไม่มีค่าตัวเลขที่แสดงเป็นกราฟได้</p>';const vals=valid.map(v=>v.value),hi=Math.max(...vals,0.001)*1.18,lo=0,w=278,h=114,pad=17;const pos=(v,i)=>[pad+i*(w-2*pad)/Math.max(valid.length-1,1),h-pad-(v.value-lo)/Math.max(hi-lo,.001)*(h-2*pad)];
 let pts=valid.map(pos),path=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");return '<div class="small">'+xesc(label)+' · '+xesc(unit)+'</div><svg class="spark" viewBox="0 0 '+w+' '+h+'"><line x1="17" y1="97" x2="261" y2="97" stroke="#c3dce1"/><path d="'+path+'" fill="none" stroke="#058ba0" stroke-width="2.5"/>'+pts.map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.3" fill="#047d95" stroke="#fff" stroke-width="1.5"/>').join("")+'<text x="5" y="14" font-size="10" fill="#62818b">'+fmt(Math.max(...vals))+'</text><text x="5" y="106" font-size="10" fill="#62818b">0</text></svg><div class="small">'+xesc(thaiDate(valid[0].date))+' → '+xesc(thaiDate(valid.at(-1).date))+' · '+valid.length+' ค่า</div>'}
@@ -198,6 +230,7 @@ html+='<div class="kv"><span>'+xesc(label)+'</span><b>ผลตรวจตา�
 if(p.cohort==="2026"&&p.abnormal_label!==undefined)html+='<span>ผลเกินค่าอ้างอิง</span><span>'+xesc(p.abnormal_label)+(p.small_count_suppressed?' (ปกปิดค่าที่แน่ชัด)':'')+'</span>';
 html+='</div>';}
 if(base&&history.some(f=>f.properties.cohort==="2025")&&(base.urine_collected!==base.slide_feb_2026||base.urine_collected!==base.slide_oct_2026))html+='<div class="notice">ยอดปี 2568 บนแผนที่ใช้ภูมิลำเนาจากทะเบียนฉบับ 28 ต.ค. 2569 ซึ่งต่างจากการจัดกลุ่มในรายงานนำเสนอเดิม</div>';
+html+=villagePublicMarkup(sel.district,currentDate);
 html+='<p class="small">แต่ละรอบอาจมีผู้ตรวจใหม่และผู้ติดตามเดิม จำนวนรายการตรวจจึงไม่ใช่จำนวนบุคคลไม่ซ้ำ ยอดคัดกรองรายอำเภอจากรายงานเดิมใช้ฐานพื้นที่ดำเนินงาน ไม่ใช่ตัวหารตามภูมิลำเนา</p>';
 }
 else {const rows=(sel.kind==="fish"?E.fish:E.crops).filter(r=>(typeof r.lat==="number"&&typeof r.lon==="number"&&(r.lat.toFixed(4)+","+r.lon.toFixed(4))===sel.key)&&r.start<=currentDate&&r.kind===sel.kind).sort((a,b)=>a.start.localeCompare(b.start));if(!rows.length)return;const last=rows.at(-1),isFish=sel.kind==="fish",field=isFish?"hg":"cd";attributionRecord=last;
@@ -231,7 +264,7 @@ for(const kind of ["fish","vegetable","rice"]){const arr=kind==="fish"?E.fish:E.
 const geoLatest=new Map();
 for(const f of G.features){const p=f.properties;if(p.start_date>currentDate)continue;const prev=geoLatest.get(p.district);if(!prev||prev.properties.start_date<p.start_date)geoLatest.set(p.district,f);}
 for(const [district,f] of geoLatest){const p=f.properties;const history=G.features.filter(x=>x.properties.district===district&&x.properties.start_date<=currentDate).sort((a,b)=>a.properties.start_date.localeCompare(b.properties.start_date));const latestSummary=history.slice(-2).map(x=>(x.properties.cohort||thaiDate(x.properties.start_date))+": "+(x.properties.urine_collected_label??x.properties.urine_collected)).join(" → ");const coords=f.geometry.coordinates;
-if(add("health",{lat:coords[1],lon:coords[0],geostatus:"District_Centroid",kind:"health"},"สุขภาพตามภูมิลำเนา · อ."+district,latestSummary+" รายการตรวจตามรอบ (ไม่ใช่จำนวนคนไม่ซ้ำ)",p.start_date,{kind:"health",district},"unknown"))counts.health++;
+if(add("health",{lat:coords[1],lon:coords[0],geostatus:"District_Centroid",kind:"health",district},"สุขภาพตามภูมิลำเนา · อ."+district,latestSummary+" รายการตรวจตามรอบ (ไม่ใช่จำนวนคนไม่ซ้ำ)",p.start_date,{kind:"health",district},"unknown"))counts.health++;
 }
 const h2025=currentDate>="2025-07-22",h2026=currentDate>="2026-07-14";
 let healthHtml=h2026?'<b>ขยายการเฝ้าระวัง ก.ค. 2569</b><div class="kv"><span>คัดกรองตามรายงานเดิม (พื้นที่ดำเนินงาน)</span><b>6,269 ราย</b><span>ผลตรวจปัสสาวะตามภูมิลำเนา</span><b>'+fmt(H.registry_rounds?.find(r=>r.round===5)?.urine_result_rows??E.healthTotals.urineCollected)+' รายการ · '+E.healthDistricts.filter(r=>r.urineCollected>0).length+' อำเภอ</b><span>เกินค่าอ้างอิงตามรายงานเดิม</span><b>31 ราย (ยังไม่ปรับตามทะเบียนใหม่)</b></div>':h2025?'<b>เริ่มเฝ้าระวัง ก.ค. 2568</b><div class="kv"><span>คัดกรองตามรายงานเดิม (พื้นที่ดำเนินงาน)</span><b>2,056 ราย</b><span>ผลตรวจปัสสาวะตามภูมิลำเนา</span><b>'+fmt(H.registry_rounds?.find(r=>r.round===1)?.urine_result_rows??H.baseline_totals.urine_collected)+' รายการ · 7 อำเภอ</b><span>Total As สูงกว่าเกณฑ์คัดกรอง</span><b>7 ราย (รายงานเดิม)</b><span>ผลแยกชนิดเกินเกณฑ์</span><b>1 รายในกลุ่มส่งตรวจ</b></div>':'<span class="small">ยังไม่มีข้อมูลเฝ้าระวังสุขภาพในช่วงนี้</span>';
@@ -395,8 +428,8 @@ for(const [name,z] of [["district-outline",405],["province-outline",415],["river
 registerReferenceToggles();
 
 keyLayers.forEach(k=>{layerGroups[k]=L.layerGroup().addTo(map)});
-const [e,s,h,w,g]=await Promise.all([fetch("data/environment_timeline_v2.json",{cache:"no-cache"}),fetch("data/sediment_13_rounds.geojson",{cache:"no-cache"}),fetch("data/health_population_timeline_public.json",{cache:"no-cache"}),fetch("data/pcd_surface_water_23_rounds.json",{cache:"no-cache"}),fetch("data/gistda/health_district_timeline_public.geojson",{cache:"no-cache"})]);if(!e.ok||!s.ok||!h.ok||!w.ok||!g.ok)throw Error("HTTP "+e.status+"/"+s.status+"/"+h.status+"/"+w.status+"/"+g.status);
-E=await e.json();S=await s.json();H=await h.json();W=await w.json();G=await g.json();
+const [e,s,h,w,g,v]=await Promise.all([fetch("data/environment_timeline_v2.json",{cache:"no-cache"}),fetch("data/sediment_13_rounds.geojson",{cache:"no-cache"}),fetch("data/health_population_timeline_public.json",{cache:"no-cache"}),fetch("data/pcd_surface_water_23_rounds.json",{cache:"no-cache"}),fetch("data/gistda/health_district_timeline_public.geojson",{cache:"no-cache"}),fetch("data/health_village_public.json",{cache:"no-cache"}).catch(()=>null)]);if(!e.ok||!s.ok||!h.ok||!w.ok||!g.ok)throw Error("HTTP "+e.status+"/"+s.status+"/"+h.status+"/"+w.status+"/"+g.status);
+E=await e.json();S=await s.json();H=await h.json();W=await w.json();G=await g.json();V=v?.ok?await v.json():null;
 const all=[...E.events.flatMap(x=>[x.start,x.end]),...E.tapReadings.map(x=>x.start),...E.fish.map(x=>x.start),...E.crops.map(x=>x.start),...E.healthDistricts.map(x=>x.start),...H.followup_phases.map(x=>x.start),...H.baseline_districts.map(x=>x.start),...G.features.map(f=>f.properties.start_date),...W.rounds.map(x=>x.start_date),...S.features.map(x=>x.properties.representative_date),"2026-10-16"].filter(Boolean);times=Array.from(new Set(all)).sort();idx=times.length-1;
 for(const k of ["dateSlider","dateSliderBottom"]){$(k).max=String(times.length-1);$(k).value=String(idx);$(k).addEventListener("input",e=>{idx=Number(e.target.value);render()})}
 $("play").addEventListener("click",()=>{if(playTimer){clearInterval(playTimer);playTimer=null;$("play").textContent="▶ เล่น Timeline";return}if(idx>=times.length-1)idx=0;$("play").textContent="Ⅱ หยุด";playTimer=setInterval(()=>{if(idx>=times.length-1){clearInterval(playTimer);playTimer=null;$("play").textContent="▶ เล่น Timeline";return}idx++;render()},Number($("speed").value))});
