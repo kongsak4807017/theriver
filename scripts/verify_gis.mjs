@@ -180,7 +180,7 @@ for(const label of districtLabels.features){
 }
 assert.ok(html.includes("district-name-pin")&&html.includes("district-names"),"District names should be rendered in non-interactive text pane");
 assert.ok(html.includes("referenceLayers.districtLabels"),"District text follows district layer visibility");
-assert.ok(html.includes("waterway = '"+'"'+"+kind+"+'"'+"'),"River query must not filter by named river only");
+assert.ok(html.includes("where:\"waterway = \"") && html.includes("kind+\"\'\""),"River query must not filter by named river only");
 assert.ok(!html.includes("name LIKE"),"Incomplete name-matched OSM river fragments must not be used");
 assert.ok(html.includes("resultOffset")&&html.includes("resultRecordCount"),"River data requires pagination rather than 2000 record truncation");
 assert.ok(html.includes('queryWaterways("stream"'),"Streams should supplement rivers at close zoom");
