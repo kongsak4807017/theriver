@@ -7,8 +7,11 @@ on:
     branches: [main]
     paths:
       - "scripts/health_aggregate.mjs"
+      - "scripts/health_village_aggregate.mjs"
+      - "scripts/verify_health_village.mjs"
       - "scripts/sync_health_registry.mjs"
       - "tests/health_aggregate.test.mjs"
+      - "tests/health_village_aggregate.test.mjs"
       - ".github/workflows/health-registry-sync.yml"
 permissions:
   contents: read
@@ -32,12 +35,14 @@ jobs:
       - name: Syntax check
         run: |
           node --check scripts/health_aggregate.mjs
+          node --check scripts/health_village_aggregate.mjs
+          node --check scripts/verify_health_village.mjs
           node --check scripts/sync_health_registry.mjs
           node --check scripts/health_identity_widget.js
       - name: Privacy-focused aggregate tests
-        run: node --test tests/health_aggregate.test.mjs
+        run: node --test tests/health_aggregate.test.mjs tests/health_village_aggregate.test.mjs
       - name: Verify existing public GIS
-        run: node scripts/verify_gis.mjs
+        run: node scripts/verify_gis.mjs && node scripts/verify_health_village.mjs
       - name: Check required private inputs
         run: |
           if [ "$HAS_SHEET_CREDENTIAL" != "true" ] || [ "$HAS_PUBLISH_TOKEN" != "true" ]; then
@@ -58,7 +63,7 @@ jobs:
         run: |
           git config user.name 'theriver-health-sync[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add data/health_identity_summary_public.json data/health_population_timeline_public.json data/environment_timeline_v2.json data/gistda/health_district_timeline_public.geojson data/gistda/health_district_summary.geojson
+          git add data/health_village_public.json data/health_identity_summary_public.json data/health_population_timeline_public.json data/environment_timeline_v2.json data/gistda/health_district_timeline_public.geojson data/gistda/health_district_summary.geojson
           if git diff --cached --quiet; then
             echo "NO_AGGREGATE_CHANGES"
             exit 0
