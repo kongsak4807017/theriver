@@ -142,6 +142,27 @@ assert.ok(html.includes("กองโรคจากการประกอบ�
 assert.ok(html.includes("กรมควบคุมมลพิษ"),"PCD publisher is identified");
 assert.ok(html.includes('r.lat==="number"&&typeof r.lon==="number"'),"Unlocated fish records must not crash station details");
 console.log("PASS GIS popup and detail agency attribution for all categories; unresolved lab stays explicitly unidentified");
+const provinceBoundary=load("data/gistda/chiang_rai_province_boundary.geojson");
+const districtBoundaries=load("data/gistda/chiang_rai_18_district_boundaries.geojson");
+assert.equal(provinceBoundary.type,"FeatureCollection");
+assert.equal(provinceBoundary.features.length,1);
+assert.equal(provinceBoundary.features[0].properties.code,"57");
+assert.equal(provinceBoundary.features[0].properties.name_th,"เชียงราย");
+assert.equal(districtBoundaries.features.length,18);
+assert.equal(new Set(districtBoundaries.features.map(f=>f.properties.code)).size,18);
+assert.ok(districtBoundaries.features.every(f=>f.properties.province_code==="57"));
+for(const f of [...provinceBoundary.features,...districtBoundaries.features]){
+  assert.ok(["Polygon","MultiPolygon"].includes(f.geometry.type));
+  assert.ok(f.geometry.coordinates.length>0);
+}
+for(const kind of ["province","districts","rivers"])assert.ok(html.includes('data-reference-layer="'+kind+'"'),"Reference toggle missing: "+kind);
+assert.ok(html.includes("loadAdministrativeBoundaries()"));
+assert.ok(html.includes("loadRiverHighlight()"));
+assert.ok(html.includes("river-underlay")&&html.includes("river-highlight"),"Bright blue river highlight and halo must be defined");
+assert.ok(html.includes('getPane(name).style.pointerEvents="none"'),"Overlay must not intercept result pin clicks");
+assert.ok(html.includes("GeoThai / OCHA COD-AB"),"Administrative boundary attribution");
+assert.ok(html.includes("OpenStreetMap contributors / ODbL"),"Waterway source attribution");
+console.log("PASS Chiang Rai 1 province, 18 districts, toggles, provenance and non-interactive blue river highlight");
 const code=html.match(/<script>\n([\s\S]*?)\n<\/script>/);
 assert.ok(code,"Client script must be present");
 new Function(code[1]);
