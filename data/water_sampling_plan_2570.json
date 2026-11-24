@@ -1,0 +1,376 @@
+{
+  "schema": "theriver/village-water-sampling-plan-v1",
+  "fiscal_year_be": 2570,
+  "source": {
+    "document": "แผนเก็บตัวอย่างน้ำประปาหมู่บ้าน 70.docx",
+    "scope": "ตารางกลุ่ม 1–4 และขอบเขตการดำเนินงาน",
+    "interpretation": "แผนปฏิบัติงานตามเอกสารที่ได้รับ 24 พ.ย. 2569; ใช้แทนประมาณการเดิม 312 ตัวอย่าง ไม่ใช่ผลตรวจหรือรายงานการดำเนินงาน"
+  },
+  "laboratory": "ห้องปฏิบัติการเคมี กลุ่มคุ้มครองผู้บริโภคด้านสาธารณสุข ศูนย์วิทยาศาสตร์การแพทย์ที่ 1/1 เชียงราย",
+  "districts": [
+    {
+      "code": "5701",
+      "name": "เมืองเชียงราย",
+      "rivers": [
+        "กก"
+      ]
+    },
+    {
+      "code": "5709",
+      "name": "แม่สาย",
+      "rivers": [
+        "สาย"
+      ]
+    },
+    {
+      "code": "5708",
+      "name": "เชียงแสน",
+      "rivers": [
+        "รวก",
+        "โขง"
+      ]
+    },
+    {
+      "code": "5707",
+      "name": "แม่จัน",
+      "rivers": [
+        "กก"
+      ]
+    },
+    {
+      "code": "5702",
+      "name": "เวียงชัย",
+      "rivers": [
+        "กก"
+      ]
+    },
+    {
+      "code": "5717",
+      "name": "เวียงเชียงรุ้ง",
+      "rivers": [
+        "กก"
+      ]
+    },
+    {
+      "code": "5718",
+      "name": "ดอยหลวง",
+      "rivers": [
+        "กก"
+      ]
+    },
+    {
+      "code": "5703",
+      "name": "เชียงของ",
+      "rivers": [
+        "โขง"
+      ]
+    },
+    {
+      "code": "5713",
+      "name": "เวียงแก่น",
+      "rivers": [
+        "โขง"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "group": 1,
+      "facilities": [
+        {
+          "name": "รพ.สต.รอบเวียง",
+          "receiving_site": "รพ.สต.ดอยฮาง",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.ดอยฮาง",
+          "receiving_site": "รพ.สต.ดอยฮาง",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.ป่ายางมน",
+          "receiving_site": "รพ.สต.ป่ายางมน",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.บ้านดงมหาวัน",
+          "receiving_site": "รพ.สต.บ้านดงมหาวัน",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.เวียงเหนือ",
+          "receiving_site": "รพ.สต.เวียงเหนือ",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.ปงน้อย",
+          "receiving_site": "รพ.สต.ปงน้อย",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.โยนก",
+          "receiving_site": "รพ.สต.โยนก",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.บ้านแซว",
+          "receiving_site": "รพ.สต.โยนก",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.ท่าข้าวเปลือก",
+          "receiving_site": "รพ.สต.ท่าข้าวเปลือก",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.แม่สาย",
+          "receiving_site": "รพ.สต.แม่สาย",
+          "coordinates": null
+        }
+      ],
+      "rounds": [
+        {
+          "round": 1,
+          "collection_start": "2026-12-14",
+          "collection_end": "2026-12-16",
+          "submission_date": "2026-12-16"
+        },
+        {
+          "round": 2,
+          "collection_start": "2027-02-15",
+          "collection_end": "2027-02-17",
+          "submission_date": "2027-02-17"
+        },
+        {
+          "round": 3,
+          "collection_start": "2027-04-19",
+          "collection_end": "2027-04-21",
+          "submission_date": "2027-04-21"
+        },
+        {
+          "round": 4,
+          "collection_start": "2027-06-14",
+          "collection_end": "2027-06-16",
+          "submission_date": "2027-06-16"
+        },
+        {
+          "round": 5,
+          "collection_start": "2027-08-15",
+          "collection_end": "2027-08-17",
+          "submission_date": "2027-08-17"
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "facilities": [
+        {
+          "name": "รพ.สต.แม่ยาว",
+          "receiving_site": "รพ.สต.แม่ยาว",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.รวมมิตร",
+          "receiving_site": "รพ.สต.แม่ยาว",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.จะคือ",
+          "receiving_site": "รพ.สต.แม่ยาว",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.โล๊ะป่าห้า",
+          "receiving_site": "รพ.สต.ริมกก",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.ริมกก",
+          "receiving_site": "รพ.สต.ริมกก",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.ดงมหาวัน",
+          "receiving_site": "รพ.สต.ดงมหาวัน",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.หนองป่าก่อ",
+          "receiving_site": "รพ.สต.หนองป่าก่อ",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.เวียงแก้ว",
+          "receiving_site": "รพ.สต.เวียงแก้ว",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.สบรวก",
+          "receiving_site": "รพ.สต.สบรวก",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.เกาะช้าง",
+          "receiving_site": "รพ.สต.เกาะช้าง",
+          "coordinates": null
+        }
+      ],
+      "rounds": [
+        {
+          "round": 1,
+          "collection_start": "2027-01-11",
+          "collection_end": "2027-01-13",
+          "submission_date": "2027-01-13"
+        },
+        {
+          "round": 2,
+          "collection_start": "2027-03-15",
+          "collection_end": "2027-03-17",
+          "submission_date": "2027-03-17"
+        },
+        {
+          "round": 3,
+          "collection_start": "2027-05-10",
+          "collection_end": "2027-05-12",
+          "submission_date": "2027-05-12"
+        },
+        {
+          "round": 4,
+          "collection_start": "2027-07-12",
+          "collection_end": "2027-07-14",
+          "submission_date": "2027-07-14"
+        },
+        {
+          "round": 5,
+          "collection_start": "2027-09-13",
+          "collection_end": "2027-09-15",
+          "submission_date": "2027-09-15"
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "facilities": [
+        {
+          "name": "รพ.สต.หาดบ้าย",
+          "receiving_site": "รพ.สต.เวียงเชียงของ",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.เวียงเชียงของ",
+          "receiving_site": "รพ.สต.เวียงเชียงของ",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.ม่วงยาย",
+          "receiving_site": "รพ.สต.ม่วงยาย",
+          "coordinates": null
+        }
+      ],
+      "rounds": [
+        {
+          "round": 1,
+          "collection_start": "2026-12-14",
+          "collection_end": "2026-12-15",
+          "submission_date": "2026-12-15"
+        },
+        {
+          "round": 2,
+          "collection_start": "2027-02-15",
+          "collection_end": "2027-02-16",
+          "submission_date": "2027-02-16"
+        },
+        {
+          "round": 3,
+          "collection_start": "2027-04-19",
+          "collection_end": "2027-04-20",
+          "submission_date": "2027-04-20"
+        },
+        {
+          "round": 4,
+          "collection_start": "2027-06-14",
+          "collection_end": "2027-06-15",
+          "submission_date": "2027-06-15"
+        },
+        {
+          "round": 5,
+          "collection_start": "2027-08-15",
+          "collection_end": "2027-08-16",
+          "submission_date": "2027-08-16"
+        }
+      ]
+    },
+    {
+      "group": 4,
+      "facilities": [
+        {
+          "name": "รพ.สต.ศรีดอนชัย",
+          "receiving_site": "รพ.สต.ศรีดอนชัย",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.บ้านดงหลวง",
+          "receiving_site": "รพ.สต.ศรีดอนชัย",
+          "coordinates": null
+        },
+        {
+          "name": "รพ.สต.หล่ายงาว",
+          "receiving_site": "รพ.สต.หล่ายงาว",
+          "coordinates": null
+        }
+      ],
+      "rounds": [
+        {
+          "round": 1,
+          "collection_start": "2027-01-11",
+          "collection_end": "2027-01-12",
+          "submission_date": "2027-01-12"
+        },
+        {
+          "round": 2,
+          "collection_start": "2027-03-15",
+          "collection_end": "2027-03-16",
+          "submission_date": "2027-03-16"
+        },
+        {
+          "round": 3,
+          "collection_start": "2027-05-10",
+          "collection_end": "2027-05-11",
+          "submission_date": "2027-05-11"
+        },
+        {
+          "round": 4,
+          "collection_start": "2027-07-12",
+          "collection_end": "2027-07-13",
+          "submission_date": "2027-07-13"
+        },
+        {
+          "round": 5,
+          "collection_start": "2027-09-13",
+          "collection_end": "2027-09-14",
+          "submission_date": "2027-09-14"
+        }
+      ]
+    }
+  ],
+  "targets": {
+    "facility_count": 26,
+    "group_count": 4,
+    "rounds_per_facility": 5,
+    "primary_samples": 130,
+    "province_additional_samples": 30,
+    "total_samples": 160,
+    "receiving_sites": 19,
+    "monthly_primary_samples": 13,
+    "months": 10
+  },
+  "additional_samples_schedule": null,
+  "notes": [
+    "เป้าหมาย 130 ตัวอย่างใน 9 อำเภอจาก 26 รพ.สต. และ 30 ตัวอย่างพื้นที่จังหวัดเชียงรายตามเอกสาร",
+    "ไม่มีวันหรือจุดเก็บสำหรับ 30 ตัวอย่างเพิ่มเติมในเอกสาร",
+    "รพ.สต.บ้านดงมหาวัน และ รพ.สต.ดงมหาวัน คงเป็นชื่อคนละรายการตามต้นฉบับ ต้องยืนยันรหัสหน่วยบริการก่อนจับคู่พิกัด",
+    "ไม่กำหนดพิกัด รพ.สต. จากจุดน้ำเดิมโดยไม่มีหลักฐานยืนยัน; แผนที่ใช้ขอบเขตอำเภอจาก GIS",
+    "กลุ่มรับส่งตัวอย่างเป็นความสัมพันธ์ตามตาราง ไม่ใช่เส้นทางขับรถที่ยืนยันแล้ว",
+    "แผน 160 ตัวอย่างไม่รวมแผนโรงงานน้ำดื่ม 332 แห่งโดยอัตโนมัติ"
+  ]
+}
